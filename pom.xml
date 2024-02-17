@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>myth-brawl</artifactId>
-    <version>0.0.1b</version>
+    <version>0.0.1d</version>
 
     <build>
         <defaultGoal>clean package</defaultGoal>
@@ -25,6 +25,8 @@
                             <artifactSet>
                                 <excludes>
                                     <exclude>io.papermc.paper:*:jar</exclude>
+                                    <exclude>org.bukkit:*:jar</exclude>
+                                    <exclude>org.spigotmc:*:jar</exclude>
                                 </excludes>
                             </artifactSet>
                         </configuration>
