@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>myth-brawl</artifactId>
-    <version>0.0.1d</version>
+    <version>0.0.1e</version>
 
     <build>
         <defaultGoal>clean package</defaultGoal>
@@ -21,15 +21,6 @@
                         <goals>
                             <goal>shade</goal>
                         </goals>
-                        <configuration>
-                            <artifactSet>
-                                <excludes>
-                                    <exclude>io.papermc.paper:*:jar</exclude>
-                                    <exclude>org.bukkit:*:jar</exclude>
-                                    <exclude>org.spigotmc:*:jar</exclude>
-                                </excludes>
-                            </artifactSet>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -59,6 +50,7 @@
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
             <version>1.20.4-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
