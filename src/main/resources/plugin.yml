@@ -1,0 +1,6 @@
+name: Brawl
+version: 0.0.1
+main: me.u8092.brawl.Brawl
+author: U8092
+website: https://mythmc.ovh/
+api-version: '1.20'
