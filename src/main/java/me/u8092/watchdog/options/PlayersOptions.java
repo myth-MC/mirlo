@@ -57,7 +57,7 @@ public class PlayersOptions implements ConfigurationSerializable {
     public @NotNull Map<String, Object> serialize() {
         Map<String, Object> data = new HashMap<>();
 
-        data.put("players.streak", this.streak);
+        data.put("players.streak.trigger", this.streak);
         data.put("players.streak.resetOnDeath", this.streakResetOnDeath);
         data.put("players.killEvent.trigger", this.killEvent);
         data.put("players.deathEvent.trigger", this.deathEvent);
@@ -78,7 +78,7 @@ public class PlayersOptions implements ConfigurationSerializable {
 
     public static PlayersOptions deserialize(Map<String, Object> args) {
         return new PlayersOptions(
-                (boolean) args.get("players.streak"),
+                (boolean) args.get("players.streak.trigger"),
                 (boolean) args.get("players.streak.resetOnDeath"),
                 (boolean) args.get("players.killEvent.trigger"),
                 (boolean) args.get("players.deathEvent.trigger"),
