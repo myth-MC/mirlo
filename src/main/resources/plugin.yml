@@ -1,6 +1,6 @@
-name: Brawl
-version: 0.0.2
-main: me.u8092.brawl.Brawl
+name: watchdog
+version: 0.0.1
+main: me.u8092.watchdog.Main
 author: U8092
 website: https://mythmc.ovh/
 api-version: '1.20'

@@ -1,22 +1,16 @@
-package me.u8092.brawl.listeners;
+package me.u8092.watchdog.listeners;
 
-import me.u8092.alzalibs.util.MessageUtil;
-import me.u8092.brawl.match.BrawlPlayer;
-import me.u8092.brawl.match.BrawlPlayerHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-import java.util.Objects;
-
-import static net.kyori.adventure.text.Component.text;
-import static net.kyori.adventure.text.Component.translatable;
-
 public class PlayerDeathListener implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player target = event.getPlayer();
+
+        /*
         if (!(Objects.requireNonNull(target.getLastDamageCause()).getEntity() instanceof Player killer))
             return;
 
@@ -39,5 +33,7 @@ public class PlayerDeathListener implements Listener {
 
             if(brawlKiller.getStreak() > 5) MessageUtil.greenEvent(target, translatable("streak.reminder", text(brawlKiller.getStreak())));
         }
+
+         */
     }
 }
