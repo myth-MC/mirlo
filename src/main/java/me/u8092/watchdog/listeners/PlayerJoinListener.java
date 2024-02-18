@@ -2,7 +2,7 @@ package me.u8092.watchdog.listeners;
 
 import me.u8092.watchdog.Main;
 import me.u8092.watchdog.variables.BooleanVariable;
-import me.u8092.watchdog.variables.IntVariable;
+import me.u8092.watchdog.variables.CountVariable;
 import me.u8092.watchdog.variables.VariableHandler;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
@@ -21,7 +21,7 @@ public class PlayerJoinListener implements Listener {
         for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
             if(configuration.getString("variables." + variable + ".scope").equals("player")) {
                 if(configuration.getString("variables." + variable + ".type").equals("int")) {
-                    VariableHandler.addIntVariable(new IntVariable(
+                    VariableHandler.addCountVariable(new CountVariable(
                             variable,
                             configuration.getInt("variables." + variable + ".default"),
                             configuration.getStringList("variables." + variable + ".increase"),

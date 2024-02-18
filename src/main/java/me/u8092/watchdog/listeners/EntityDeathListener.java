@@ -1,7 +1,7 @@
 package me.u8092.watchdog.listeners;
 
 import me.u8092.watchdog.Main;
-import me.u8092.watchdog.variables.IntVariable;
+import me.u8092.watchdog.variables.CountVariable;
 import me.u8092.watchdog.variables.VariableHandler;
 import org.apache.logging.log4j.util.Strings;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -31,40 +31,40 @@ public class EntityDeathListener implements Listener {
             if(killer instanceof Player) {
                 for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) continue;
-                    if(configuration.getString("variables." + variable + ".type").equals("int")) {
+                    if(configuration.getString("variables." + variable + ".type").equals("count")) {
                         for(String increaseEvent : configuration.getStringList("variables." + variable + ".increase")) {
                             if(increaseEvent.equals("PLAYER_DEATH_EVENT")) {
-                                IntVariable intVariable = VariableHandler.getIntVariable(victim.getName(), variable);
-                                intVariable.setValue(intVariable.getValue() + 1);
+                                CountVariable countVariable = VariableHandler.getCountVariable(victim.getName(), variable);
+                                countVariable.setValue(countVariable.getValue() + 1);
                             }
 
                             if(increaseEvent.equals("PLAYER_KILL_EVENT")) {
-                                IntVariable intVariable = VariableHandler.getIntVariable(killer.getName(), variable);
-                                intVariable.setValue(intVariable.getValue() + 1);
+                                CountVariable countVariable = VariableHandler.getCountVariable(killer.getName(), variable);
+                                countVariable.setValue(countVariable.getValue() + 1);
                             }
                         }
 
                         for(String decreaseEvent : configuration.getStringList("variables." + variable + ".decrease")) {
                             if(decreaseEvent.equals("PLAYER_DEATH_EVENT")) {
-                                IntVariable intVariable = VariableHandler.getIntVariable(victim.getName(), variable);
-                                intVariable.setValue(intVariable.getValue() - 1);
+                                CountVariable countVariable = VariableHandler.getCountVariable(victim.getName(), variable);
+                                countVariable.setValue(countVariable.getValue() - 1);
                             }
 
                             if(decreaseEvent.equals("PLAYER_KILL_EVENT")) {
-                                IntVariable intVariable = VariableHandler.getIntVariable(killer.getName(), variable);
-                                intVariable.setValue(intVariable.getValue() - 1);
+                                CountVariable countVariable = VariableHandler.getCountVariable(killer.getName(), variable);
+                                countVariable.setValue(countVariable.getValue() - 1);
                             }
                         }
 
                         for(String resetEvent : configuration.getStringList("variables." + variable + ".reset")) {
                             if(resetEvent.equals("PLAYER_DEATH_EVENT")) {
-                                IntVariable intVariable = VariableHandler.getIntVariable(victim.getName(), variable);
-                                intVariable.setValue(intVariable.getDefaultValue());
+                                CountVariable countVariable = VariableHandler.getCountVariable(victim.getName(), variable);
+                                countVariable.setValue(countVariable.getDefaultValue());
                             }
 
                             if(resetEvent.equals("PLAYER_KILL_EVENT")) {
-                                IntVariable intVariable = VariableHandler.getIntVariable(killer.getName(), variable);
-                                intVariable.setValue(intVariable.getDefaultValue());
+                                CountVariable countVariable = VariableHandler.getCountVariable(killer.getName(), variable);
+                                countVariable.setValue(countVariable.getDefaultValue());
                             }
                         }
                     }
@@ -84,7 +84,7 @@ public class EntityDeathListener implements Listener {
                                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) continue;
 
                                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
-                                        int value = VariableHandler.getIntVariable(victim.getName(), variable).getValue();
+                                        int value = VariableHandler.getCountVariable(victim.getName(), variable).getValue();
                                         joinedArgs = joinedArgs.replace(variable, String.valueOf(value));
                                     }
 
@@ -112,7 +112,7 @@ public class EntityDeathListener implements Listener {
                                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) continue;
 
                                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
-                                        int value = VariableHandler.getIntVariable(killer.getName(), variable).getValue();
+                                        int value = VariableHandler.getCountVariable(killer.getName(), variable).getValue();
                                         joinedArgs = joinedArgs.replace(variable, String.valueOf(value));
                                     }
 

@@ -6,20 +6,27 @@
 
     <groupId>me.u8092</groupId>
     <artifactId>watchdog</artifactId>
-    <version>0.1.33</version>
+    <version>0.2.0a</version>
 
     <build>
         <defaultGoal>clean package</defaultGoal>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.0.0</version>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.5.5</version>
+                <configuration>
+                    <finalName>watchdog_v${project.version}_${maven.build.timestamp}</finalName>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
                 <executions>
                     <execution>
+                        <id>make-assembly</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>shade</goal>
+                            <goal>single</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -38,11 +45,6 @@
             <id>paper-repo</id>
             <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
-
-        <repository>
-            <id>jenkins-local</id>
-            <url>https://ci.mythmc.ovh/plugin/repository/everything</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -51,12 +53,6 @@
             <artifactId>paper-api</artifactId>
             <version>1.20.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>me.u8092</groupId>
-            <artifactId>alza-libs</artifactId>
-            <version>0.0.13</version>
         </dependency>
     </dependencies>
 </project>
