@@ -74,9 +74,13 @@ public class EntityDeathListener implements Listener {
                         List<String> fullEvent = List.of(sendEvents.split(","));
                         System.out.println(fullEvent);
 
+                        System.out.println(fullEvent.get(0));
+
                         if(fullEvent.get(0).equals("PLAYER_DEATH_EVENT")) {
                             if(fullEvent.size() > 1) {
                                 String joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
+
+                                System.out.println(joinedArgs);
 
                                 for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables")).getKeys(false)) {
                                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
@@ -103,6 +107,8 @@ public class EntityDeathListener implements Listener {
                         if(fullEvent.get(0).equals("PLAYER_KILL_EVENT")) {
                             if(fullEvent.size() > 1) {
                                 String joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
+
+                                System.out.println(joinedArgs);
 
                                 for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables")).getKeys(false)) {
                                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
@@ -141,48 +147,6 @@ public class EntityDeathListener implements Listener {
 
             if(victim instanceof Creature) {
 
-            }
-        }
-    }
-
-    public void process(Entity killer, Entity victim) {
-        if(killer instanceof Player && victim instanceof Player) {
-            // clan DeathEvent (Player kills player)
-            if(configuration.getBoolean("clans.deathEvent.players")) {
-                ((Player)victim).sendPluginMessage(Main.getInstance(), "watchdog:clans", byteArray("death,player," + killer.getName()));
-            }
-
-            // clan KillEvent (Player kills player)
-            if(configuration.getBoolean("clans.killEvent.players")) {
-                ((Player)killer).sendPluginMessage(Main.getInstance(), "watchdog:clans", byteArray("kill,player," + victim.getName()));
-            }
-
-            // players DeathEvent (Player kills player)
-            if(configuration.getBoolean("players.deathEvent.players")) {
-                ((Player)victim).sendPluginMessage(Main.getInstance(), "watchdog:players", byteArray("death,player," + killer.getName()));
-            }
-
-            // players KillEvent (Player kills player)
-            if(configuration.getBoolean("players.killEvent.players")) {
-                ((Player)victim).sendPluginMessage(Main.getInstance(), "watchdog:players", byteArray("death,player," + killer.getName()));
-            }
-        }
-
-        if(killer instanceof Player && victim instanceof Creature) {
-            if(configuration.getBoolean("players.killEvent.creatures")) {
-                ((Player)killer).sendPluginMessage(Main.getInstance(), "watchdog:players", byteArray("kill,player," + killer.getName()));
-            }
-        }
-
-        if(killer instanceof Creature && victim instanceof Player) {
-            // clan DeathEvent (Creature kills player)
-            if(configuration.getBoolean("clans.deathEvent.creatures")) {
-                ((Player)victim).sendPluginMessage(Main.getInstance(), "watchdog:clans", byteArray("death,player," + killer.getName()));
-            }
-
-            // player DeathEvent (Creature kills player)
-            if(configuration.getBoolean("players.deathEvent.creatures")) {
-                ((Player)victim).sendPluginMessage(Main.getInstance(), "watchdog:players", byteArray("death,player," + killer.getName()));
             }
         }
     }
