@@ -1,36 +1,30 @@
-clans:
-  friendlyFire: true
-  killEvent:
-    trigger: true
-    xpAmount: 0
-    players: true
-    hostileMobs: true
-    peacefulMobs: true
-    foreignClanMultiplier: 1.25
-  deathEvent:
-    trigger: true
-    xpAmount: 0
-    players: true
-    others: false
-    foreignClanMultiplier: 1
-
-sessions:
-  friendlyFire: true
-
-players:
+variables:
   streak:
-    trigger: true
-    resetOnDeath: true
-  killEvent:
-    trigger: true
-    mytharitesAmount: 10
-    players: true
-    hostileMobs: false
-    peacefulMobs: false
-    streakMultiplier: 1
-  deathEvent:
-    trigger: true
-    mytharitesAmount: 10
-    players: true
-    others: false
-    streakMultiplier: 1
+    type: int
+    scope: player
+    default: 0
+    increase:
+      - PLAYER_KILL_EVENT
+    decrease: []
+    reset:
+      - PLAYER_DEATH_EVENT
+  clanFriendlyFire:
+    type: boolean
+    scope: global
+    default: true
+
+channels:
+  players:
+    send:
+      - PLAYER_DEATH_EVENT
+      - PLAYER_KILL_EVENT,streak
+    receive: []
+  clans:
+    send:
+      - PLAYER_DEATH_EVENT
+      - PLAYER_KILL_EVENT
+    receive: []
+  test:
+    send:
+      - CREATURE_DEATH_EVENT
+      - CREATURE_KILL_EVENT
