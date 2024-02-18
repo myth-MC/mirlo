@@ -108,6 +108,17 @@ public class EntityDeathListener implements Listener {
                                 System.out.println(configuration.getConfigurationSection("variables").getKeys(false));
                                 System.out.println(Objects.requireNonNull(configuration.getConfigurationSection("variables")).getKeys(false));
 
+                                if(configuration.getString("variables." + fullEvent.get(1) + ".type").equals("int")) {
+                                    int value = VariableHandler.getIntVariable(killer.getName(), fullEvent.get(1)).getValue();
+                                    joinedArgs = joinedArgs.replace(fullEvent.get(1), String.valueOf(value));
+                                }
+
+                                if(configuration.getString("variables." + fullEvent.get(1) + ".type").equals("boolean")) {
+                                    boolean value = VariableHandler.getBooleanVariable(killer.getName(), fullEvent.get(1)).getValue();
+                                    joinedArgs = joinedArgs.replace(fullEvent.get(1), String.valueOf(value));
+                                }
+
+                                /*
                                 for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
                                     System.out.println(variable);
                                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
@@ -122,6 +133,8 @@ public class EntityDeathListener implements Listener {
                                         joinedArgs = joinedArgs.replace(variable, String.valueOf(value));
                                     }
                                 }
+
+                                 */
 
                                 System.out.println("2 " + joinedArgs);
 
