@@ -68,11 +68,11 @@ public class EntityDeathListener implements Listener {
                     }
                 }
 
-                System.out.print("pre-channel section");
+                System.out.println("pre-channel section");
                 for(String channel : configuration.getConfigurationSection("channels").getKeys(true)) {
-                    System.out.print(channel);
+                    System.out.println(channel);
                     for(String sendEvents : configuration.getStringList("channels." + channel + ".send")) {
-                        System.out.print(sendEvents);
+                        System.out.println(sendEvents);
                         List<String> fullEvent = List.of(sendEvents.split(","));
 
                         //DEBUG
