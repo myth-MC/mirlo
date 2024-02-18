@@ -78,7 +78,6 @@ public class EntityDeathListener implements Listener {
                                 String joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
 
                                 for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
-                                    System.out.println(variable + " " + configuration.getString("variables." + variable + ".scope"));
                                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
                                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
                                         int value = VariableHandler.getIntVariable(victim.getName(), variable).getValue();
@@ -104,9 +103,9 @@ public class EntityDeathListener implements Listener {
                             if(fullEvent.size() > 1) {
                                 String joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
 
-                                for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables").getKeys(false))) {
+                                for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
                                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
-                                    System.out.println(variable);
+                                    System.out.println(variable + " " + configuration.getString("variables." + variable + ".scope"));
                                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
                                         int value = VariableHandler.getIntVariable(killer.getName(), variable).getValue();
                                         joinedArgs = joinedArgs.replace(variable, String.valueOf(value));
@@ -116,6 +115,8 @@ public class EntityDeathListener implements Listener {
                                         boolean value = VariableHandler.getBooleanVariable(killer.getName(), variable).getValue();
                                         joinedArgs = joinedArgs.replace(variable, String.valueOf(value));
                                     }
+
+                                    System.out.println(joinedArgs + "-1");
                                 }
 
                                 System.out.println(joinedArgs);
