@@ -25,8 +25,11 @@ public class EntityDeathListener implements Listener {
         Entity victim = event.getEntity();
         Entity killer = Objects.requireNonNull(victim.getLastDamageCause()).getEntity();
 
+        System.out.println("evento triggerea");
         if(victim instanceof Player) {
+            System.out.println("victim es player");
             if(killer instanceof Player) {
+                System.out.println("killer es player");
                 for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables")).getKeys(false)) {
                     if(!configuration.getString("variables." + variable + ".scope").equals("player")) return;
                     if(configuration.getString("variables." + variable + ".type").equals("int")) {

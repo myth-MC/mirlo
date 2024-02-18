@@ -59,8 +59,6 @@ public class Main extends JavaPlugin {
     private void registerChannels() {
         for(String channel : Objects.requireNonNull(getConfig().getConfigurationSection("channels")).getKeys(false)) {
             getServer().getMessenger().registerOutgoingPluginChannel(this, "watchdog:" + channel);
-            // debug
-            getLogger().info(getServer().getMessenger().getOutgoingChannels().toString());
             getLogger().info("Registered plugin channel with ID: watchdog:" + channel);
             //getServer().getMessenger().registerIncomingPluginChannel(this, channel, );
         }
