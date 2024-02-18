@@ -77,9 +77,8 @@ public class EntityDeathListener implements Listener {
                             if(fullEvent.size() > 1) {
                                 String joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
 
-                                System.out.println(joinedArgs);
-
-                                for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables").getKeys(false))) {
+                                for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
+                                    System.out.println(variable + " " + configuration.getString("variables." + variable + ".scope"));
                                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
                                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
                                         int value = VariableHandler.getIntVariable(victim.getName(), variable).getValue();
