@@ -22,6 +22,7 @@ public class EntityDeathListener implements Listener {
 
         if(victim instanceof Player) {
             lookFor.put("targetPlayer", victim.getName());
+            MessagerUtil.updateVariables("PLAYER_DEATH_EVENT", victim.getName(), true);
             MessagerUtil.send(((Player) victim).getPlayer(), "PLAYER_DEATH_EVENT", lookFor);
 
             if(!(event.getEntity().getLastDamageCause() instanceof EntityDamageByEntityEvent entityDamageByEntityEvent)) return;
@@ -29,6 +30,7 @@ public class EntityDeathListener implements Listener {
             Entity killer = entityDamageByEntityEvent.getDamager();
             if(killer instanceof Player) {
                 lookFor.put("player", killer.getName());
+                MessagerUtil.updateVariables("PLAYER_KILLS_PLAYER_EVENT", victim.getName(), true);
                 MessagerUtil.send(((Player) killer).getPlayer(), "PLAYER_KILLS_PLAYER_EVENT", lookFor);
             }
         }
@@ -39,6 +41,7 @@ public class EntityDeathListener implements Listener {
             Entity killer = entityDamageByEntityEvent.getDamager();
             if(killer instanceof Player) {
                 lookFor.put("player", killer.getName());
+                MessagerUtil.updateVariables("PLAYER_KILLS_CREATURE_EVENT", victim.getName(), true);
                 MessagerUtil.send(((Player) killer).getPlayer(), "PLAYER_KILLS_CREATURE_EVENT", lookFor);
             }
         }

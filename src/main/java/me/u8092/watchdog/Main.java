@@ -4,6 +4,7 @@ import me.u8092.watchdog.commands.ReloadCommand;
 import me.u8092.watchdog.listeners.EntityDamageByEntityListener;
 import me.u8092.watchdog.listeners.EntityDeathListener;
 import me.u8092.watchdog.listeners.PlayerJoinListener;
+import me.u8092.watchdog.util.DebugUtil;
 import me.u8092.watchdog.variables.BooleanVariable;
 import me.u8092.watchdog.variables.CountVariable;
 import me.u8092.watchdog.variables.VariableHandler;
@@ -13,6 +14,7 @@ import java.util.Objects;
 
 public class Main extends JavaPlugin {
     private static Main instance;
+    private static boolean isPaper;
 
     @Override
     public void onLoad() {
@@ -22,7 +24,14 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         saveDefaultConfig();
-        //saveResource("config.yml", false);
+
+        try {
+            Class.forName("net.kyori.adventure.Adventure");
+            isPaper = true;
+            DebugUtil.info("This server seems to be running Paper");
+        } catch(ClassNotFoundException ignored) {
+
+        }
 
         registerGlobalVariables();
         registerChannels();
@@ -37,11 +46,13 @@ public class Main extends JavaPlugin {
 
     public static Main getInstance() { return instance; }
 
+    public static boolean isPaper() { return isPaper; }
+
     private void registerChannels() {
         for(String channel : Objects.requireNonNull(getConfig().getConfigurationSection("channels")).getKeys(false)) {
             getServer().getMessenger().registerOutgoingPluginChannel(this, "watchdog:" + channel);
 
-            if(getConfig().getBoolean("debug")) getLogger().info("Registered plugin channel with ID 'watchdog:" + channel + "'");
+            if(getConfig().getBoolean("debug")) DebugUtil.info("Registered plugin channel with ID 'watchdog:" + channel + "'");
         }
     }
 
@@ -58,17 +69,21 @@ public class Main extends JavaPlugin {
                             "global"
                     ));
 
-                    if(getConfig().getBoolean("debug")) getLogger().info("Registered new CountVariable '" + variable + "'");
+                    if(getConfig().getBoolean("debug")) DebugUtil.info("Registered new global CountVariable '" + variable + "'");
                 }
 
                 if(getConfig().getString("variables." + variable + ".type").equals("boolean")) {
                     VariableHandler.addBooleanVariable(new BooleanVariable(
                             variable,
                             getConfig().getBoolean("variables." + variable + ".default"),
+                            getConfig().getStringList("variables." + variable + ".true"),
+                            getConfig().getStringList("variables." + variable + ".false"),
+                            getConfig().getStringList("variables." + variable + ".switch"),
+                            getConfig().getStringList("variables." + variable + ".reset"),
                             "global"
                     ));
 
-                    if(getConfig().getBoolean("debug")) getLogger().info("Registered new BooleanVariable '" + variable + "'");
+                    if(getConfig().getBoolean("debug")) DebugUtil.info("Registered new global BooleanVariable '" + variable + "'");
                 }
             }
         }
@@ -83,4 +98,6 @@ public class Main extends JavaPlugin {
     private void registerCommands() {
         this.getCommand("watchdogreload").setExecutor(new ReloadCommand());
     }
+
+
 }

@@ -1,4 +1,5 @@
 debug: false
+debug-prefix: "[WatchdogDebug]"
 
 variables:
   streak:
@@ -14,6 +15,18 @@ variables:
     type: boolean
     scope: global
     default: true
+    true: []
+    false: []
+    switch: []
+    reset: []
+  test:
+    type: boolean
+    scope: player
+    default: false
+    true: []
+    false: []
+    switch: []
+    reset: []
 
 channels:
   players:

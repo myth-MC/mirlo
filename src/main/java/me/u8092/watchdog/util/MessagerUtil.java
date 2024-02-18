@@ -43,7 +43,7 @@ public class MessagerUtil {
         String joinedArgs = "";
 
         if(DEBUG) {
-            Main.getInstance().getLogger().info("Event '" + event + "' called");
+            DebugUtil.info("Event '" + event + "' called");
         }
 
         for(String channel : configuration.getConfigurationSection("channels").getKeys(false)) {
@@ -116,11 +116,74 @@ public class MessagerUtil {
             }
 
             if(DEBUG) {
-                Main.getInstance().getLogger().info("Sending '" + event + joinedArgs + "' to channel 'watchdog:" + channel + "'");
+                DebugUtil.info("Sending '" + event + joinedArgs + "' to channel 'watchdog:" + channel + "'");
             }
 
             player.sendPluginMessage(Main.getInstance(), "watchdog:" + channel,
                     byteArray(event + joinedArgs));
+        }
+    }
+
+    public static void updateVariables(String event, String varOwner, boolean globalToo) {
+        updateVariables(event, varOwner);
+        if(globalToo) {
+            updateVariables(event, "global");
+        }
+    }
+
+    public static void updateVariables(String event, String varOwner) {
+        for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
+            if(configuration.getString("variables." + variable + ".type").equals("count")) {
+                CountVariable countVariable = VariableHandler.getCountVariable(varOwner, configuration.getString("variables." + variable + ".name"));
+                if(countVariable == null) continue;
+
+                for(String increaseEvent : countVariable.getIncreaseEvents()) {
+                    if(increaseEvent.equals(event)) {
+                        countVariable.setValue(countVariable.getValue() + 1);
+                    }
+                }
+
+                for(String decreaseEvent : countVariable.getDecreaseEvents()) {
+                    if(decreaseEvent.equals(event)) {
+                        countVariable.setValue(countVariable.getValue() + 1);
+                    }
+                }
+
+                for(String resetEvent : countVariable.getResetEvents()) {
+                    if(resetEvent.equals(event)) {
+                        countVariable.setValue(countVariable.getValue() + 1);
+                    }
+                }
+            }
+
+            if(configuration.getString("variables." + variable + ".type").equals("boolean")) {
+                BooleanVariable booleanVariable = VariableHandler.getBooleanVariable(varOwner, configuration.getString("variables." + variable + ".name"));
+                if(booleanVariable == null) continue;
+
+                for(String trueEvent : booleanVariable.getTrueEvents()) {
+                    if(trueEvent.equals(event)) {
+                        booleanVariable.setValue(true);
+                    }
+                }
+
+                for(String falseEvent : booleanVariable.getFalseEvents()) {
+                    if(falseEvent.equals(event)) {
+                        booleanVariable.setValue(false);
+                    }
+                }
+
+                for(String switchEvent : booleanVariable.getSwitchEvents()) {
+                    if(switchEvent.equals(event)) {
+                        booleanVariable.setValue(!booleanVariable.getValue());
+                    }
+                }
+
+                for(String resetEvent : booleanVariable.getResetEvents()) {
+                    if(resetEvent.equals(event)) {
+                        booleanVariable.setValue(booleanVariable.getDefaultValue());
+                    }
+                }
+            }
         }
     }
 }

@@ -6,7 +6,7 @@
 
     <groupId>me.u8092</groupId>
     <artifactId>watchdog</artifactId>
-    <version>0.2.0b</version>
+    <version>0.2.0c</version>
 
     <build>
         <defaultGoal>clean package</defaultGoal>

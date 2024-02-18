@@ -1,6 +1,7 @@
 package me.u8092.watchdog.listeners;
 
 import me.u8092.watchdog.Main;
+import me.u8092.watchdog.util.DebugUtil;
 import me.u8092.watchdog.variables.BooleanVariable;
 import me.u8092.watchdog.variables.CountVariable;
 import me.u8092.watchdog.variables.VariableHandler;
@@ -30,17 +31,21 @@ public class PlayerJoinListener implements Listener {
                             playerName
                     ));
 
-                    if(Main.getInstance().getConfig().getBoolean("debug")) Main.getInstance().getLogger().info("Registered new CountVariable '" + variable + "'");
+                    if(Main.getInstance().getConfig().getBoolean("debug")) DebugUtil.info("Registered new CountVariable '" + variable + "' for " + playerName);
                 }
 
                 if(configuration.getString("variables." + variable + ".type").equals("boolean")) {
                     VariableHandler.addBooleanVariable(new BooleanVariable(
                             variable,
                             configuration.getBoolean("variables." + variable + ".default"),
+                            configuration.getStringList("variables." + variable + ".true"),
+                            configuration.getStringList("variables." + variable + ".false"),
+                            configuration.getStringList("variables." + variable + ".switch"),
+                            configuration.getStringList("variables." + variable + ".reset"),
                             playerName
                     ));
 
-                    if(Main.getInstance().getConfig().getBoolean("debug")) Main.getInstance().getLogger().info("Registered new BooleanVariable '" + variable + "'");
+                    if(Main.getInstance().getConfig().getBoolean("debug")) DebugUtil.info("Registered new BooleanVariable '" + variable + "' for " + playerName);
                 }
             }
         }
