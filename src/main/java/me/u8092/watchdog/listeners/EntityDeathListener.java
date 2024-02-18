@@ -27,8 +27,9 @@ public class EntityDeathListener implements Listener {
 
         if(victim instanceof Player) {
             if(killer instanceof Player) {
-                /*
                 for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables")).getKeys(false)) {
+                    if(variable == null) return;
+
                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
                         for(String increaseEvent : configuration.getStringList("variables." + variable + ".increase")) {
@@ -68,18 +69,20 @@ public class EntityDeathListener implements Listener {
                         }
                     }
                 }
-                   */
+
                 for(String channel : configuration.getConfigurationSection("channels").getKeys(false)) {
                     for(String sendEvents : configuration.getStringList("channels." + channel + ".send")) {
                         List<String> fullEvent = List.of(sendEvents.split(","));
-                        System.out.println(fullEvent);
 
                         if(fullEvent.get(0).equals("PLAYER_DEATH_EVENT")) {
                             if(fullEvent.size() > 1) {
                                 String joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
 
                                 for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
+                                    if(variable == null) return;
+
                                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
+
                                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
                                         int value = VariableHandler.getIntVariable(victim.getName(), variable).getValue();
                                         joinedArgs = joinedArgs.replace(variable, String.valueOf(value));
@@ -100,27 +103,12 @@ public class EntityDeathListener implements Listener {
                         }
 
                         if(fullEvent.get(0).equals("PLAYER_KILL_EVENT")) {
-                            System.out.println(fullEvent.size());
                             if(fullEvent.size() > 1) {
                                 String joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
 
-                                System.out.println("1_" + joinedArgs);
-                                System.out.println(configuration.getConfigurationSection("variables").getKeys(false));
-                                System.out.println(Objects.requireNonNull(configuration.getConfigurationSection("variables")).getKeys(false));
-
-                                if(configuration.getString("variables." + fullEvent.get(1) + ".type").equals("int")) {
-                                    int value = VariableHandler.getIntVariable(killer.getName(), fullEvent.get(1)).getValue();
-                                    joinedArgs = joinedArgs.replace(fullEvent.get(1), String.valueOf(value));
-                                }
-
-                                if(configuration.getString("variables." + fullEvent.get(1) + ".type").equals("boolean")) {
-                                    boolean value = VariableHandler.getBooleanVariable(killer.getName(), fullEvent.get(1)).getValue();
-                                    joinedArgs = joinedArgs.replace(fullEvent.get(1), String.valueOf(value));
-                                }
-
-                                /*
                                 for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
-                                    System.out.println(variable);
+                                    if(variable == null) return;
+
                                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
 
                                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
@@ -133,10 +121,6 @@ public class EntityDeathListener implements Listener {
                                         joinedArgs = joinedArgs.replace(variable, String.valueOf(value));
                                     }
                                 }
-
-                                 */
-
-                                System.out.println("2 " + joinedArgs);
 
                                 ((Player) killer).sendPluginMessage(Main.getInstance(), "watchdog:" + channel,
                                         byteArray("kill," + killer.getName() + "," + joinedArgs));
