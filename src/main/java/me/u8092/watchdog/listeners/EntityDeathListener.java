@@ -27,6 +27,7 @@ public class EntityDeathListener implements Listener {
 
         if(victim instanceof Player) {
             if(killer instanceof Player) {
+                /*
                 for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) continue;
                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
@@ -67,6 +68,8 @@ public class EntityDeathListener implements Listener {
                         }
                     }
                 }
+
+                 */
 
                 for(String channel : configuration.getConfigurationSection("channels").getKeys(false)) {
                     for(String sendEvents : configuration.getStringList("channels." + channel + ".send")) {
