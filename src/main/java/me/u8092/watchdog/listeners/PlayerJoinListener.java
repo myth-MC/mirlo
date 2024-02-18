@@ -20,7 +20,7 @@ public class PlayerJoinListener implements Listener {
     private void registerPlayerVariables(String playerName) {
         for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
             if(configuration.getString("variables." + variable + ".scope").equals("player")) {
-                if(configuration.getString("variables." + variable + ".type").equals("int")) {
+                if(configuration.getString("variables." + variable + ".type").equals("count")) {
                     VariableHandler.addCountVariable(new CountVariable(
                             variable,
                             configuration.getInt("variables." + variable + ".default"),
@@ -29,6 +29,8 @@ public class PlayerJoinListener implements Listener {
                             configuration.getStringList("variables." + variable + ".reset"),
                             playerName
                     ));
+
+                    if(Main.getInstance().getConfig().getBoolean("debug")) Main.getInstance().getLogger().info("Registered new CountVariable '" + variable + "'");
                 }
 
                 if(configuration.getString("variables." + variable + ".type").equals("boolean")) {
@@ -37,6 +39,8 @@ public class PlayerJoinListener implements Listener {
                             configuration.getBoolean("variables." + variable + ".default"),
                             playerName
                     ));
+
+                    if(Main.getInstance().getConfig().getBoolean("debug")) Main.getInstance().getLogger().info("Registered new BooleanVariable '" + variable + "'");
                 }
             }
         }

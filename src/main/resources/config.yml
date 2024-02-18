@@ -1,3 +1,5 @@
+debug: false
+
 variables:
   streak:
     type: int

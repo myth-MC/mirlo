@@ -1,6 +1,6 @@
 package me.u8092.watchdog;
 
-import me.u8092.watchdog.commands.KitCommand;
+import me.u8092.watchdog.commands.ReloadCommand;
 import me.u8092.watchdog.listeners.EntityDamageByEntityListener;
 import me.u8092.watchdog.listeners.EntityDeathListener;
 import me.u8092.watchdog.listeners.PlayerJoinListener;
@@ -21,8 +21,8 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        saveResource("config.yml", false);
         saveDefaultConfig();
+        //saveResource("config.yml", false);
 
         registerGlobalVariables();
         registerChannels();
@@ -40,15 +40,15 @@ public class Main extends JavaPlugin {
     private void registerChannels() {
         for(String channel : Objects.requireNonNull(getConfig().getConfigurationSection("channels")).getKeys(false)) {
             getServer().getMessenger().registerOutgoingPluginChannel(this, "watchdog:" + channel);
-            getLogger().info("Registered plugin channel with ID: watchdog:" + channel);
-            //getServer().getMessenger().registerIncomingPluginChannel(this, channel, );
+
+            if(getConfig().getBoolean("debug")) getLogger().info("Registered plugin channel with ID 'watchdog:" + channel + "'");
         }
     }
 
     private void registerGlobalVariables() {
         for(String variable : Objects.requireNonNull(getConfig().getConfigurationSection("variables")).getKeys(false)) {
             if(getConfig().getString("variables." + variable + ".scope").equals("global")) {
-                if(getConfig().getString("variables." + variable + ".type").equals("int")) {
+                if(getConfig().getString("variables." + variable + ".type").equals("count")) {
                     VariableHandler.addCountVariable(new CountVariable(
                             variable,
                             getConfig().getInt("variables." + variable + ".default"),
@@ -57,6 +57,8 @@ public class Main extends JavaPlugin {
                             getConfig().getStringList("variables." + variable + ".reset"),
                             "global"
                     ));
+
+                    if(getConfig().getBoolean("debug")) getLogger().info("Registered new CountVariable '" + variable + "'");
                 }
 
                 if(getConfig().getString("variables." + variable + ".type").equals("boolean")) {
@@ -65,6 +67,8 @@ public class Main extends JavaPlugin {
                             getConfig().getBoolean("variables." + variable + ".default"),
                             "global"
                     ));
+
+                    if(getConfig().getBoolean("debug")) getLogger().info("Registered new BooleanVariable '" + variable + "'");
                 }
             }
         }
@@ -77,6 +81,6 @@ public class Main extends JavaPlugin {
     }
 
     private void registerCommands() {
-        this.getCommand("kit").setExecutor(new KitCommand());
+        this.getCommand("watchdogreload").setExecutor(new ReloadCommand());
     }
 }

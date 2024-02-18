@@ -15,6 +15,26 @@ public class VariableHandler {
         return countVariables;
     }
 
+    public static List<BooleanVariable> getBooleanVariables(String owner) {
+        List<BooleanVariable> ownerVariables = new ArrayList<>();
+
+        for(BooleanVariable booleanVariable : booleanVariables) {
+            if(booleanVariable.getOwner().equals(owner)) ownerVariables.add(booleanVariable);
+        }
+
+        return ownerVariables;
+    }
+
+    public static List<CountVariable> getCountVariables(String owner) {
+        List<CountVariable> ownerVariables = new ArrayList<>();
+
+        for(CountVariable countVariable : countVariables) {
+            if(countVariable.getOwner().equals(owner)) ownerVariables.add(countVariable);
+        }
+
+        return ownerVariables;
+    }
+
     public static BooleanVariable getBooleanVariable(String owner, String name) {
         for(BooleanVariable booleanVariable : booleanVariables) {
             if(booleanVariable.getOwner().equals(owner) && booleanVariable.getName().equals(name)) return booleanVariable;
