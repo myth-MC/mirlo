@@ -69,22 +69,13 @@ public class EntityDeathListener implements Listener {
                     }
                 }
                    */
-                System.out.println("pre-channel section");
                 for(String channel : configuration.getConfigurationSection("channels").getKeys(true)) {
-                    System.out.println(channel);
                     for(String sendEvents : configuration.getStringList("channels." + channel + ".send")) {
-                        System.out.println(sendEvents);
                         List<String> fullEvent = List.of(sendEvents.split(","));
 
-                        //DEBUG
-                        System.out.println(fullEvent);
-
-                        if(fullEvent.get(0).equals("PLAYER_DEATH_EVENT")) {
+                        if(fullEvent.contains("PLAYER_DEATH_EVENT")) {
                             if(fullEvent.size() > 1) {
                                 String joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
-
-                                //DEBUG
-                                System.out.println(joinedArgs);
 
                                 for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables")).getKeys(false)) {
                                     if(!configuration.getString("variables." + variable + ".scope").equals("player")) return;
@@ -108,7 +99,7 @@ public class EntityDeathListener implements Listener {
                                     byteArray("death," + killer.getName()));
                         }
 
-                        if(fullEvent.get(0).equals("PLAYER_KILL_EVENT")) {
+                        if(fullEvent.contains("PLAYER_KILL_EVENT")) {
                             if(fullEvent.size() > 1) {
                                 String joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
                                 for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables")).getKeys(false)) {
