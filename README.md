@@ -24,7 +24,7 @@
 **mirlo 🐦‍⬛** provides server owners with a simple way of implementing and handling plugin messaging between a proxy and its backends (check [Usage](#usage)).
 
 >[!WARNING]
-> mirlo is **not ready for production use** yet. The project is still missing an important part of its core functions. You can report any misbehaviours or share any feedback by [creating an issue](https://github.com/myth-MC/watchdog/issues). 
+> mirlo is **not ready for production use** yet. The project is still missing an important part of its core functions. You can report any misbehaviours or share any feedback by [creating an issue](https://github.com/myth-MC/mirlo/issues). 
 
 ### Compatibility chart
 
@@ -42,8 +42,8 @@
 
 ## Installation
 
-1. **Download the mirlo jar file for your platform**. You can find the latest version on our releases page.
-2. **Add the mirlo jar file to your server's plugin folder**. Make sure to delete any older versions of watchdog.
+1. **Download the mirlo jar file for your platform**. You can find the latest version on [our releases page](https://github.com/myth-MC/mirlo/releases).
+2. **Add the mirlo jar file to your server's plugin folder**. Make sure to delete any older versions of mirlo.
 3. **Fully restart your server**. Type `/stop` and start the server again [instead of using `/reload`](https://madelinemiller.dev/blog/problem-with-reload/).
 
 Repeat the steps for every backend of your network.
@@ -52,7 +52,7 @@ Repeat the steps for every backend of your network.
 
 ## Usage
 
-Once you run watchdog for the first time it will generate a `config.yml` file under `/plugins/mirlo`. This file contains everything you might want to modify depending on your needs.
+Once you run mirlo for the first time it will generate a `config.yml` file under `/plugins/mirlo`. This file contains everything you might want to modify depending on your needs.
 
 ### Events
 
