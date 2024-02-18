@@ -28,13 +28,13 @@ public class EntityDeathListener implements Listener {
         if(victim instanceof Player) {
             if(killer instanceof Player) {
                 for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables")).getKeys(false)) {
-                    System.out.println(variable);
                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
                         for(String increaseEvent : configuration.getStringList("variables." + variable + ".increase")) {
                             if(increaseEvent.equals("PLAYER_DEATH_EVENT")) {
                                 IntVariable intVariable = VariableHandler.getIntVariable(victim.getName(), variable);
                                 intVariable.setValue(intVariable.getValue() + 1);
+                                System.out.print(intVariable);
                             }
 
                             if(increaseEvent.equals("PLAYER_KILL_EVENT")) {
