@@ -24,7 +24,7 @@
 **watchdog 🔎** provides server owners with a simple way of implementing and handling plugin messaging between a proxy and its backends (check [Usage](#usage)).
 
 >[!WARNING]
-> watchdog is **not ready** for production use yet. The project is still missing an important part of its core functions. You can report any misbehaviours or send us feedback by creating an issue. 
+> watchdog is **not ready** for production use yet. The project is still missing an important part of its core functions. You can report any misbehaviours or share any feedback by [creating an issue](https://github.com/myth-MC/watchdog/issues). 
 
 ### Compatibility chart
 
@@ -60,8 +60,6 @@ Events listen for specific actions that happen in the game. Right now you can us
 * **PLAYER_KILLS_PLAYER_EVENT** (player, targetPlayer): triggered whenever a player kills another player.
 * **PLAYER_KILLS_CREATURE_EVENT** (player): triggered whenever a player kills a mob.
 * **PLAYER_DEATH_EVENT** (targetPlayer): triggered whenever a player dies.
-* **CREATURE_KILLS_PLAYER_EVENT** (targetPlayer): triggered whenever a mob kills a player.
-* **OTHER_KILLS_PLAYER_EVENT** (targetPlayer): triggered whenever a player dies in strange conditions.
 
 ### Variables
 
