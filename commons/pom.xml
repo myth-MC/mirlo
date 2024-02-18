@@ -3,15 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>me.u8092</groupId>
+        <artifactId>mirlo</artifactId>
+        <version>0.2.0e</version>
+    </parent>
 
-    <groupId>me.u8092</groupId>
-    <artifactId>mirlo</artifactId>
-    <version>0.2.0e</version>
-    <packaging>pom</packaging>
-    <modules>
-        <module>bukkit</module>
-        <module>commons</module>
-    </modules>
+    <artifactId>mirlo-commons</artifactId>
+    <version>1.0.0</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

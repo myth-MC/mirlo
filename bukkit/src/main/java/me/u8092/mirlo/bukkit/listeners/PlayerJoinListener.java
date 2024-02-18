@@ -1,9 +1,10 @@
-package me.u8092.watchdog.listeners;
+package me.u8092.mirlo.bukkit.listeners;
 
-import me.u8092.watchdog.Main;
-import me.u8092.watchdog.variables.BooleanVariable;
-import me.u8092.watchdog.variables.IntVariable;
-import me.u8092.watchdog.variables.VariableHandler;
+import me.u8092.mirlo.bukkit.util.DebugUtil;
+import me.u8092.mirlo.bukkit.Main;
+import me.u8092.mirlo.commons.variables.BooleanVariable;
+import me.u8092.mirlo.commons.variables.CountVariable;
+import me.u8092.mirlo.commons.variables.VariableHandler;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,8 +21,8 @@ public class PlayerJoinListener implements Listener {
     private void registerPlayerVariables(String playerName) {
         for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
             if(configuration.getString("variables." + variable + ".scope").equals("player")) {
-                if(configuration.getString("variables." + variable + ".type").equals("int")) {
-                    VariableHandler.addIntVariable(new IntVariable(
+                if(configuration.getString("variables." + variable + ".type").equals("count")) {
+                    VariableHandler.addCountVariable(new CountVariable(
                             variable,
                             configuration.getInt("variables." + variable + ".default"),
                             configuration.getStringList("variables." + variable + ".increase"),
@@ -29,14 +30,22 @@ public class PlayerJoinListener implements Listener {
                             configuration.getStringList("variables." + variable + ".reset"),
                             playerName
                     ));
+
+                    if(Main.getInstance().getConfig().getBoolean("debug")) DebugUtil.info("Registered new CountVariable '" + variable + "' for " + playerName);
                 }
 
                 if(configuration.getString("variables." + variable + ".type").equals("boolean")) {
                     VariableHandler.addBooleanVariable(new BooleanVariable(
                             variable,
                             configuration.getBoolean("variables." + variable + ".default"),
+                            configuration.getStringList("variables." + variable + ".true"),
+                            configuration.getStringList("variables." + variable + ".false"),
+                            configuration.getStringList("variables." + variable + ".switch"),
+                            configuration.getStringList("variables." + variable + ".reset"),
                             playerName
                     ));
+
+                    if(Main.getInstance().getConfig().getBoolean("debug")) DebugUtil.info("Registered new BooleanVariable '" + variable + "' for " + playerName);
                 }
             }
         }

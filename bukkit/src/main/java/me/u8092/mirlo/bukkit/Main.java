@@ -1,24 +1,20 @@
-package me.u8092.watchdog;
+package me.u8092.mirlo.bukkit;
 
-import me.u8092.alzalibs.clans.ClansAPI;
-import me.u8092.alzalibs.clans.IClansAPI;
-import me.u8092.alzalibs.database.ClansDataSQL;
-import me.u8092.alzalibs.database.UsersDataSQL;
-import me.u8092.alzalibs.users.IUsersAPI;
-import me.u8092.alzalibs.users.UsersAPI;
-import me.u8092.watchdog.commands.KitCommand;
-import me.u8092.watchdog.listeners.EntityDamageByEntityListener;
-import me.u8092.watchdog.listeners.EntityDeathListener;
-import me.u8092.watchdog.listeners.PlayerJoinListener;
-import me.u8092.watchdog.variables.BooleanVariable;
-import me.u8092.watchdog.variables.IntVariable;
-import me.u8092.watchdog.variables.VariableHandler;
+import me.u8092.mirlo.bukkit.commands.ReloadCommand;
+import me.u8092.mirlo.bukkit.listeners.EntityDamageByEntityListener;
+import me.u8092.mirlo.bukkit.listeners.EntityDeathListener;
+import me.u8092.mirlo.bukkit.listeners.PlayerJoinListener;
+import me.u8092.mirlo.bukkit.util.DebugUtil;
+import me.u8092.mirlo.commons.variables.BooleanVariable;
+import me.u8092.mirlo.commons.variables.CountVariable;
+import me.u8092.mirlo.commons.variables.VariableHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
 
 public class Main extends JavaPlugin {
     private static Main instance;
+    private static boolean isPaper;
 
     @Override
     public void onLoad() {
@@ -27,14 +23,20 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        saveResource("config.yml", false);
         saveDefaultConfig();
+
+        try {
+            Class.forName("net.kyori.adventure.Adventure");
+            isPaper = true;
+            DebugUtil.info("This server seems to be running Paper");
+        } catch(ClassNotFoundException ignored) {
+
+        }
 
         registerGlobalVariables();
         registerChannels();
         registerListeners();
 
-        initDatabase();
         registerCommands();
     }
     @Override
@@ -44,30 +46,21 @@ public class Main extends JavaPlugin {
 
     public static Main getInstance() { return instance; }
 
-    private static void initDatabase() {
-        IUsersAPI usersApi = new UsersDataSQL();
-        UsersAPI.setApi(usersApi);
-
-        IClansAPI clansApi = new ClansDataSQL();
-        ClansAPI.setApi(clansApi);
-
-        //ClansDataSQL.load(DB_HOST, DB_DATABASE, DB_USER, DB_PASSWORD, DB_AUTORECONNECT);
-        //UsersDataSQL.load(DB_HOST, DB_DATABASE, DB_USER, DB_PASSWORD, DB_AUTORECONNECT);
-    }
+    public static boolean isPaper() { return isPaper; }
 
     private void registerChannels() {
         for(String channel : Objects.requireNonNull(getConfig().getConfigurationSection("channels")).getKeys(false)) {
-            getServer().getMessenger().registerOutgoingPluginChannel(this, "watchdog:" + channel);
-            getLogger().info("Registered plugin channel with ID: watchdog:" + channel);
-            //getServer().getMessenger().registerIncomingPluginChannel(this, channel, );
+            getServer().getMessenger().registerOutgoingPluginChannel(this, "mirlo:" + channel);
+
+            if(getConfig().getBoolean("debug")) DebugUtil.info("Registered plugin channel with ID 'mirlo:" + channel + "'");
         }
     }
 
     private void registerGlobalVariables() {
         for(String variable : Objects.requireNonNull(getConfig().getConfigurationSection("variables")).getKeys(false)) {
             if(getConfig().getString("variables." + variable + ".scope").equals("global")) {
-                if(getConfig().getString("variables." + variable + ".type").equals("int")) {
-                    VariableHandler.addIntVariable(new IntVariable(
+                if(getConfig().getString("variables." + variable + ".type").equals("count")) {
+                    VariableHandler.addCountVariable(new CountVariable(
                             variable,
                             getConfig().getInt("variables." + variable + ".default"),
                             getConfig().getStringList("variables." + variable + ".increase"),
@@ -75,14 +68,22 @@ public class Main extends JavaPlugin {
                             getConfig().getStringList("variables." + variable + ".reset"),
                             "global"
                     ));
+
+                    if(getConfig().getBoolean("debug")) DebugUtil.info("Registered new global CountVariable '" + variable + "'");
                 }
 
                 if(getConfig().getString("variables." + variable + ".type").equals("boolean")) {
                     VariableHandler.addBooleanVariable(new BooleanVariable(
                             variable,
                             getConfig().getBoolean("variables." + variable + ".default"),
+                            getConfig().getStringList("variables." + variable + ".true"),
+                            getConfig().getStringList("variables." + variable + ".false"),
+                            getConfig().getStringList("variables." + variable + ".switch"),
+                            getConfig().getStringList("variables." + variable + ".reset"),
                             "global"
                     ));
+
+                    if(getConfig().getBoolean("debug")) DebugUtil.info("Registered new global BooleanVariable '" + variable + "'");
                 }
             }
         }
@@ -95,6 +96,6 @@ public class Main extends JavaPlugin {
     }
 
     private void registerCommands() {
-        this.getCommand("kit").setExecutor(new KitCommand());
+        this.getCommand("mirloreload").setExecutor(new ReloadCommand());
     }
 }

@@ -1,3 +1,6 @@
+debug: false
+debug-prefix: "[MirloDebug]"
+
 variables:
   streak:
     type: int
@@ -12,6 +15,18 @@ variables:
     type: boolean
     scope: global
     default: true
+    true: []
+    false: []
+    switch: []
+    reset: []
+  test:
+    type: boolean
+    scope: player
+    default: false
+    true: []
+    false: []
+    switch: []
+    reset: []
 
 channels:
   players:

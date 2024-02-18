@@ -1,6 +1,6 @@
-package me.u8092.watchdog.listeners;
+package me.u8092.mirlo.bukkit.listeners;
 
-import me.u8092.watchdog.Main;
+import me.u8092.mirlo.bukkit.Main;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
