@@ -39,7 +39,13 @@ jobs:
             distribution: 'temurin'
             java-version: 17
         - run: mvn -B package --file pom.xml -DskipTests
-        - run: mkdir staging && cp target/*jar-with-dependencies.jar staging
+        - name: Cache the Maven packages to speed up build
+          uses: actions/cache@v1
+          with:
+            path: ~/.m2
+            key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+            restore-keys: ${{ runner.os }}-m2   
+        - run: mkdir staging && cp target/bukkit/*.jar staging
         - uses: actions/upload-artifact@v1
           with:
             name: Package
