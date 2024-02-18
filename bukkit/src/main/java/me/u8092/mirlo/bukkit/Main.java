@@ -1,13 +1,13 @@
-package me.u8092.watchdog.bukkit;
+package me.u8092.mirlo.bukkit;
 
-import me.u8092.watchdog.bukkit.commands.ReloadCommand;
-import me.u8092.watchdog.bukkit.listeners.EntityDamageByEntityListener;
-import me.u8092.watchdog.bukkit.listeners.EntityDeathListener;
-import me.u8092.watchdog.bukkit.listeners.PlayerJoinListener;
-import me.u8092.watchdog.bukkit.util.DebugUtil;
-import me.u8092.watchdog.commons.variables.BooleanVariable;
-import me.u8092.watchdog.commons.variables.CountVariable;
-import me.u8092.watchdog.commons.variables.VariableHandler;
+import me.u8092.mirlo.bukkit.commands.ReloadCommand;
+import me.u8092.mirlo.bukkit.listeners.EntityDamageByEntityListener;
+import me.u8092.mirlo.bukkit.listeners.EntityDeathListener;
+import me.u8092.mirlo.bukkit.listeners.PlayerJoinListener;
+import me.u8092.mirlo.bukkit.util.DebugUtil;
+import me.u8092.mirlo.commons.variables.BooleanVariable;
+import me.u8092.mirlo.commons.variables.CountVariable;
+import me.u8092.mirlo.commons.variables.VariableHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -50,9 +50,9 @@ public class Main extends JavaPlugin {
 
     private void registerChannels() {
         for(String channel : Objects.requireNonNull(getConfig().getConfigurationSection("channels")).getKeys(false)) {
-            getServer().getMessenger().registerOutgoingPluginChannel(this, "watchdog:" + channel);
+            getServer().getMessenger().registerOutgoingPluginChannel(this, "mirlo:" + channel);
 
-            if(getConfig().getBoolean("debug")) DebugUtil.info("Registered plugin channel with ID 'watchdog:" + channel + "'");
+            if(getConfig().getBoolean("debug")) DebugUtil.info("Registered plugin channel with ID 'mirlo:" + channel + "'");
         }
     }
 
@@ -96,6 +96,6 @@ public class Main extends JavaPlugin {
     }
 
     private void registerCommands() {
-        this.getCommand("watchdogreload").setExecutor(new ReloadCommand());
+        this.getCommand("mirloreload").setExecutor(new ReloadCommand());
     }
 }

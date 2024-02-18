@@ -1,4 +1,4 @@
-# watchdog 🔎
+# mirlo 🐦‍⬛
 
 ### A simple approach to [plugin messaging](https://web.archive.org/web/20220711204310/https://dinnerbone.com/blog/2012/01/13/minecraft-plugin-channels-messaging/)
 
@@ -21,10 +21,10 @@
 
 ## Information
 
-**watchdog 🔎** provides server owners with a simple way of implementing and handling plugin messaging between a proxy and its backends (check [Usage](#usage)).
+**mirlo 🐦‍⬛** provides server owners with a simple way of implementing and handling plugin messaging between a proxy and its backends (check [Usage](#usage)).
 
 >[!WARNING]
-> watchdog is **not ready** for production use yet. The project is still missing an important part of its core functions. You can report any misbehaviours or share any feedback by [creating an issue](https://github.com/myth-MC/watchdog/issues). 
+> mirlo is **not ready for production use** yet. The project is still missing an important part of its core functions. You can report any misbehaviours or share any feedback by [creating an issue](https://github.com/myth-MC/watchdog/issues). 
 
 ### Compatibility chart
 
@@ -42,8 +42,8 @@
 
 ## Installation
 
-1. **Download the watchdog jar file for your platform**. You can find the latest version on our releases page.
-2. **Add the watchdog jar file to your server's plugin folder**. Make sure to delete any older versions of watchdog.
+1. **Download the mirlo jar file for your platform**. You can find the latest version on our releases page.
+2. **Add the mirlo jar file to your server's plugin folder**. Make sure to delete any older versions of watchdog.
 3. **Fully restart your server**. Type `/stop` and start the server again [instead of using `/reload`](https://madelinemiller.dev/blog/problem-with-reload/).
 
 Repeat the steps for every backend of your network.
@@ -52,7 +52,7 @@ Repeat the steps for every backend of your network.
 
 ## Usage
 
-Once you run watchdog for the first time it will generate a `config.yml` file under `/plugins/watchdog`. This file contains everything you might want to modify depending on your needs.
+Once you run watchdog for the first time it will generate a `config.yml` file under `/plugins/mirlo`. This file contains everything you might want to modify depending on your needs.
 
 ### Events
 
@@ -93,7 +93,7 @@ variables:
       - PLAYER_DEATH_EVENT # A player dies
 
 channels:
-  players: # Channel "watchdog:players"
+  players: # Channel "mirlo:players"
     target: proxy # Where should messages from this channels be sent (survival, skywars, etc) (set to all if message should be sent to every backend)
     send: # What events should be sent
       - PLAYER_KILLS_PLAYER_EVENT,streak

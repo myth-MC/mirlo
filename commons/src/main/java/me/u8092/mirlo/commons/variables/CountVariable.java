@@ -1,4 +1,4 @@
-package me.u8092.watchdog.commons.variables;
+package me.u8092.mirlo.commons.variables;
 
 import java.util.List;
 

@@ -1,12 +1,12 @@
-name: watchdog
-version: 0.2.0d
-main: me.u8092.watchdog.Main
+name: mirlo
+version: 0.2.0e
+main: me.u8092.mirlo.bukkit.Main
 author: U8092
 website: https://mythmc.ovh/
 api-version: '1.20'
 commands:
-  watchdogreload:
+  mirloreload:
     description: Reload config.yml
-    permission: watchdog.reload
-    permission-message: You don't have enough permission.
+    permission: mirlo.reload
+    permission-message: You don't have enough permissions.
     usage: /<command>

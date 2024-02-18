@@ -1,10 +1,10 @@
-package me.u8092.watchdog.bukkit.listeners;
+package me.u8092.mirlo.bukkit.listeners;
 
-import me.u8092.watchdog.bukkit.Main;
-import me.u8092.watchdog.bukkit.util.DebugUtil;
-import me.u8092.watchdog.commons.variables.BooleanVariable;
-import me.u8092.watchdog.commons.variables.CountVariable;
-import me.u8092.watchdog.commons.variables.VariableHandler;
+import me.u8092.mirlo.bukkit.util.DebugUtil;
+import me.u8092.mirlo.bukkit.Main;
+import me.u8092.mirlo.commons.variables.BooleanVariable;
+import me.u8092.mirlo.commons.variables.CountVariable;
+import me.u8092.mirlo.commons.variables.VariableHandler;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

@@ -1,5 +1,5 @@
 debug: false
-debug-prefix: "[WatchdogDebug]"
+debug-prefix: "[MirloDebug]"
 
 variables:
   streak:

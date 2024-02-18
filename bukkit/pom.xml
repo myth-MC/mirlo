@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>me.u8092</groupId>
-        <artifactId>watchdog</artifactId>
-        <version>0.2.0d</version>
+        <artifactId>mirlo</artifactId>
+        <version>0.2.0e</version>
     </parent>
 
-    <artifactId>watchdog-bukkit</artifactId>
+    <artifactId>mirlo-bukkit</artifactId>
     <version>1.0.0</version>
 
     <build>
@@ -67,7 +67,7 @@
     <dependencies>
         <dependency>
             <groupId>me.u8092</groupId>
-            <artifactId>watchdog-commons</artifactId>
+            <artifactId>mirlo-commons</artifactId>
             <version>1.0.0</version>
         </dependency>
 

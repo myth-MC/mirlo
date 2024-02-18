@@ -1,4 +1,4 @@
-package me.u8092.watchdog.bukkit.events;
+package me.u8092.mirlo.bukkit.events;
 
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;

@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.u8092</groupId>
-    <artifactId>watchdog</artifactId>
-    <version>0.2.0d</version>
+    <artifactId>mirlo</artifactId>
+    <version>0.2.0e</version>
     <packaging>pom</packaging>
     <modules>
         <module>bukkit</module>

@@ -1,11 +1,11 @@
-package me.u8092.watchdog.bukkit.util;
+package me.u8092.mirlo.bukkit.util;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
-import me.u8092.watchdog.bukkit.Main;
-import me.u8092.watchdog.commons.variables.BooleanVariable;
-import me.u8092.watchdog.commons.variables.CountVariable;
-import me.u8092.watchdog.commons.variables.VariableHandler;
+import me.u8092.mirlo.bukkit.Main;
+import me.u8092.mirlo.commons.variables.BooleanVariable;
+import me.u8092.mirlo.commons.variables.CountVariable;
+import me.u8092.mirlo.commons.variables.VariableHandler;
 import org.apache.logging.log4j.util.Strings;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -116,10 +116,10 @@ public class MessagerUtil {
             }
 
             if(DEBUG) {
-                DebugUtil.info("Sending '" + event + joinedArgs + "' to channel 'watchdog:" + channel + "'");
+                DebugUtil.info("Sending '" + event + joinedArgs + "' to channel 'mirlo:" + channel + "'");
             }
 
-            player.sendPluginMessage(Main.getInstance(), "watchdog:" + channel,
+            player.sendPluginMessage(Main.getInstance(), "mirlo:" + channel,
                     byteArray(event + joinedArgs));
         }
     }
