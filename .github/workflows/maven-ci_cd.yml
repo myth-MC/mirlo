@@ -45,7 +45,7 @@ jobs:
             path: ~/.m2
             key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
             restore-keys: ${{ runner.os }}-m2   
-        - run: mkdir staging && cp target/bukkit/*.jar staging
+        - run: mkdir staging && cp bukkit/target/*.jar staging
         - uses: actions/upload-artifact@v1
           with:
             name: Package
