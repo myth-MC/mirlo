@@ -68,13 +68,20 @@ public class EntityDeathListener implements Listener {
                     }
                 }
 
-                for(String channel : Objects.requireNonNull(configuration.getConfigurationSection("channels")).getKeys(true)) {
+                for(String channel : Objects.requireNonNull(configuration.getConfigurationSection("channels")).getKeys(false)) {
                     for(String sendEvents : configuration.getStringList("channels." + channel + ".send")) {
                         List<String> fullEvent = List.of(sendEvents.split(","));
+
+                        //DEBUG
+                        System.out.println(fullEvent);
 
                         if(fullEvent.get(0).equals("PLAYER_DEATH_EVENT")) {
                             if(fullEvent.size() > 1) {
                                 String joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
+
+                                //DEBUG
+                                System.out.println(joinedArgs);
+
                                 for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables")).getKeys(false)) {
                                     if(!configuration.getString("variables." + variable + ".scope").equals("player")) return;
                                     if(configuration.getString("variables." + variable + ".type").equals("int")) {

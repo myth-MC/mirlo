@@ -15,14 +15,7 @@ public class EntityDamageByEntityListener implements Listener {
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if(event.getEntity() instanceof Player victim && event.getDamager() instanceof Player attacker) {
-            if(!configuration.getBoolean("clans.friendlyFire")) {
-                String victimClan = UsersAPI.getApi().getClanName(victim.getName());
-                String attackerClan = UsersAPI.getApi().getClanName(attacker.getName());
 
-                if(victimClan != null && attackerClan != null) {
-                    if(victimClan.equals(attackerClan)) event.setCancelled(true);
-                }
-            }
         }
     }
 }
