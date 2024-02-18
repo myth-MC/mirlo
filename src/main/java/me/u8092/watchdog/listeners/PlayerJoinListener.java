@@ -20,7 +20,7 @@ public class PlayerJoinListener implements Listener {
     }
 
     private void registerPlayerVariables(String playerName) {
-        for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables")).getKeys(false)) {
+        for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
             if(configuration.getString("variables." + variable + ".scope").equals("player")) {
                 if(configuration.getString("variables." + variable + ".type").equals("int")) {
                     VariableHandler.addIntVariable(new IntVariable(

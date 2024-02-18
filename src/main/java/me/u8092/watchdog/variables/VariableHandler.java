@@ -17,7 +17,7 @@ public class VariableHandler {
 
     public static BooleanVariable getBooleanVariable(String owner, String name) {
         for(BooleanVariable booleanVariable : booleanVariables) {
-            if(booleanVariable.getOwner().equals(owner)) return booleanVariable;
+            if(booleanVariable.getOwner().equals(owner) && booleanVariable.getName().equals(name)) return booleanVariable;
         }
 
         return null;
@@ -25,7 +25,7 @@ public class VariableHandler {
 
     public static IntVariable getIntVariable(String owner, String name) {
         for(IntVariable intVariable : intVariables) {
-            if(intVariable.getOwner().equals(owner)) return intVariable;
+            if(intVariable.getOwner().equals(owner) && intVariable.getName().equals(name)) return intVariable;
         }
 
         return null;
