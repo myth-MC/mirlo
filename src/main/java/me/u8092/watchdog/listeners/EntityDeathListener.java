@@ -79,7 +79,7 @@ public class EntityDeathListener implements Listener {
 
                                 System.out.println(joinedArgs);
 
-                                for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables")).getKeys(true)) {
+                                for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables").getKeys(true))) {
                                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
                                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
                                         int value = VariableHandler.getIntVariable(victim.getName(), variable).getValue();
@@ -105,7 +105,7 @@ public class EntityDeathListener implements Listener {
                             if(fullEvent.size() > 1) {
                                 String joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
 
-                                for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables")).getKeys(true)) {
+                                for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables").getKeys(true))) {
                                     System.out.println(variable);
                                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
                                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
