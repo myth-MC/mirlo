@@ -92,11 +92,10 @@ public class EntityDeathListener implements Listener {
 
                                 ((Player) victim).sendPluginMessage(Main.getInstance(), "watchdog:" + channel,
                                         byteArray("death," + victim.getName() + "," + joinedArgs));
-                                return;
+                            } else {
+                                ((Player) victim).sendPluginMessage(Main.getInstance(), "watchdog:" + channel,
+                                        byteArray("death," + victim.getName()));
                             }
-
-                            ((Player) victim).sendPluginMessage(Main.getInstance(), "watchdog:" + channel,
-                                    byteArray("death," + victim.getName()));
                         }
 
                         if(fullEvent.get(0).equals("PLAYER_KILL_EVENT")) {
@@ -105,7 +104,7 @@ public class EntityDeathListener implements Listener {
 
                                 for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
                                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
-                                    System.out.println(variable + " " + configuration.getString("variables." + variable + ".scope"));
+
                                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
                                         int value = VariableHandler.getIntVariable(killer.getName(), variable).getValue();
                                         joinedArgs = joinedArgs.replace(variable, String.valueOf(value));
@@ -115,19 +114,16 @@ public class EntityDeathListener implements Listener {
                                         boolean value = VariableHandler.getBooleanVariable(killer.getName(), variable).getValue();
                                         joinedArgs = joinedArgs.replace(variable, String.valueOf(value));
                                     }
-
-                                    System.out.println(joinedArgs + "-1");
                                 }
 
                                 System.out.println(joinedArgs);
 
                                 ((Player) killer).sendPluginMessage(Main.getInstance(), "watchdog:" + channel,
                                         byteArray("kill," + killer.getName() + "," + joinedArgs));
-                                return;
+                            } else {
+                                ((Player) killer).sendPluginMessage(Main.getInstance(), "watchdog:" + channel,
+                                        byteArray("kill," + killer.getName()));
                             }
-
-                            ((Player) killer).sendPluginMessage(Main.getInstance(), "watchdog:" + channel,
-                                    byteArray("kill," + killer.getName()));
                         }
                     }
                 }
