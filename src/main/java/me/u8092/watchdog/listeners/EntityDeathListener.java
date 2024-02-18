@@ -106,8 +106,8 @@ public class EntityDeathListener implements Listener {
                                 String joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
 
                                 for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables").getKeys(false))) {
-                                    System.out.println(variable);
                                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
+                                    System.out.println(variable);
                                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
                                         int value = VariableHandler.getIntVariable(killer.getName(), variable).getValue();
                                         joinedArgs = joinedArgs.replace(variable, String.valueOf(value));
@@ -118,6 +118,8 @@ public class EntityDeathListener implements Listener {
                                         joinedArgs = joinedArgs.replace(variable, String.valueOf(value));
                                     }
                                 }
+
+                                System.out.println(joinedArgs);
 
                                 ((Player) killer).sendPluginMessage(Main.getInstance(), "watchdog:" + channel,
                                         byteArray("kill," + killer.getName() + "," + joinedArgs));
