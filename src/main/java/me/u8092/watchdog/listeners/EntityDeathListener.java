@@ -68,7 +68,8 @@ public class EntityDeathListener implements Listener {
                     }
                 }
 
-                for(String channel : Objects.requireNonNull(configuration.getConfigurationSection("channels")).getKeys(false)) {
+                System.out.print("pre-channel section");
+                for(String channel : configuration.getConfigurationSection("channels").getKeys(true)) {
                     System.out.print(channel);
                     for(String sendEvents : configuration.getStringList("channels." + channel + ".send")) {
                         System.out.print(sendEvents);
