@@ -24,7 +24,7 @@
 **watchdog 🔎** provides server owners with a simple way of implementing and handling plugin messaging between a proxy and its backends (check [Usage](#usage)).
 
 >[!WARNING]
-> watchdog is **not ready** for production use yet. The project is still missing an important part of its core functions. You can report any misbehaviours or send us feedback by creating an issue. 
+> watchdog is **not ready** for production use yet. The project is still missing an important part of its core functions. You can report any misbehaviours or share any feedback by [creating an issue](https://github.com/myth-MC/watchdog/issues). 
 
 ### Compatibility chart
 
