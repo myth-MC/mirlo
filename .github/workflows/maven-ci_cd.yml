@@ -39,7 +39,11 @@ jobs:
             java-version: 17
         - run: mvn -B package --file pom.xml -DskipTests 
         - run: mkdir staging && cp bukkit/target/*.jar staging
-        - uses: actions/upload-artifact@v1
+        - uses: "marvinpinto/action-automatic-releases@latest"
           with:
-            name: Package
-            path: staging
+            repo_token: "${{ secrets.GITHUB_TOKEN }}"
+            automatic_release_tag: "latest"
+            prerelease: true
+            title: "Development Build"
+            files: |
+              staging/*.jar
