@@ -24,7 +24,7 @@
 **mirlo 🐦‍⬛** provides server owners with a simple way of implementing and handling plugin messaging between a proxy and its backends (check [Usage](#usage)).
 
 >[!WARNING]
-> mirlo is **not ready for production use** yet. The project is still missing an important part of its core functions. You can report any misbehaviours or share any feedback by [creating an issue](https://github.com/myth-MC/mirlo/issues). 
+> mirlo is **not ready for production use** yet. The project is still missing an important part of its core functions (right now its sole purpose is sending plugin messages to a proxy). You can report any misbehaviours or share any feedback by [creating an issue](https://github.com/myth-MC/mirlo/issues). 
 
 ### Compatibility chart
 
@@ -52,7 +52,7 @@ Repeat the steps for every backend of your network.
 
 ## Usage
 
-Once you run mirlo for the first time it will generate a `config.yml` file under `/plugins/mirlo`. This file contains everything you might want to modify depending on your needs.
+When you run mirlo for the first time it will generate a `config.yml` file under `/plugins/mirlo`. This file contains everything you might want to modify depending on your server's needs.
 
 ### Events
 
@@ -60,6 +60,8 @@ Events listen for specific actions that happen in the game. Right now you can us
 * **PLAYER_KILLS_PLAYER_EVENT** (player, targetPlayer): triggered whenever a player kills another player.
 * **PLAYER_KILLS_CREATURE_EVENT** (player): triggered whenever a player kills a mob.
 * **PLAYER_DEATH_EVENT** (targetPlayer): triggered whenever a player dies.
+
+_Values in parentheses are placeholders._
 
 ### Variables
 
@@ -74,7 +76,7 @@ Channels are the mean of communication where information will be exchanged with 
 #### Placeholders
 
 You can use placeholders when sending or receiving a plugin message from a specific channel. Valid placeholders are:
-* Pre-defined variables.
+* Pre-defined variables (config.yml)
 * `player`
 * `targetPlayer`
 
