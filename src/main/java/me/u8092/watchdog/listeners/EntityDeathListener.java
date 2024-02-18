@@ -28,13 +28,9 @@ public class EntityDeathListener implements Listener {
         if(victim instanceof Player) {
             if(killer instanceof Player) {
                 for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
-                    if(variable == null) return;
-
-                    if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
+                    if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) continue;
                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
                         for(String increaseEvent : configuration.getStringList("variables." + variable + ".increase")) {
-                            if(increaseEvent == null) return;
-
                             if(increaseEvent.equals("PLAYER_DEATH_EVENT")) {
                                 IntVariable intVariable = VariableHandler.getIntVariable(victim.getName(), variable);
                                 intVariable.setValue(intVariable.getValue() + 1);
@@ -47,8 +43,6 @@ public class EntityDeathListener implements Listener {
                         }
 
                         for(String decreaseEvent : configuration.getStringList("variables." + variable + ".decrease")) {
-                            if(decreaseEvent == null) return;
-
                             if(decreaseEvent.equals("PLAYER_DEATH_EVENT")) {
                                 IntVariable intVariable = VariableHandler.getIntVariable(victim.getName(), variable);
                                 intVariable.setValue(intVariable.getValue() - 1);
@@ -61,8 +55,6 @@ public class EntityDeathListener implements Listener {
                         }
 
                         for(String resetEvent : configuration.getStringList("variables." + variable + ".reset")) {
-                            if(resetEvent == null) return;
-
                             if(resetEvent.equals("PLAYER_DEATH_EVENT")) {
                                 IntVariable intVariable = VariableHandler.getIntVariable(victim.getName(), variable);
                                 intVariable.setValue(intVariable.getDefaultValue());
@@ -85,9 +77,9 @@ public class EntityDeathListener implements Listener {
                                 String joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
 
                                 for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
-                                    if(variable == null) return;
+                                    if(variable == null) continue;
 
-                                    if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
+                                    if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) continue;
 
                                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
                                         int value = VariableHandler.getIntVariable(victim.getName(), variable).getValue();
@@ -113,9 +105,9 @@ public class EntityDeathListener implements Listener {
                                 String joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
 
                                 for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
-                                    if(variable == null) return;
+                                    if(variable == null) continue;
 
-                                    if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
+                                    if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) continue;
 
                                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
                                         int value = VariableHandler.getIntVariable(killer.getName(), variable).getValue();
