@@ -1,11 +1,10 @@
-package me.u8092.watchdog.commands;
+package me.u8092.watchdog.bukkit.commands;
 
-import me.u8092.watchdog.Main;
-import me.u8092.watchdog.util.DebugUtil;
+import me.u8092.watchdog.bukkit.Main;
+import me.u8092.watchdog.bukkit.util.DebugUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class ReloadCommand implements CommandExecutor {
     @Override

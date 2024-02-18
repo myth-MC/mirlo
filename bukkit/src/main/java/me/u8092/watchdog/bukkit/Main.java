@@ -1,13 +1,13 @@
-package me.u8092.watchdog;
+package me.u8092.watchdog.bukkit;
 
-import me.u8092.watchdog.commands.ReloadCommand;
-import me.u8092.watchdog.listeners.EntityDamageByEntityListener;
-import me.u8092.watchdog.listeners.EntityDeathListener;
-import me.u8092.watchdog.listeners.PlayerJoinListener;
-import me.u8092.watchdog.util.DebugUtil;
-import me.u8092.watchdog.variables.BooleanVariable;
-import me.u8092.watchdog.variables.CountVariable;
-import me.u8092.watchdog.variables.VariableHandler;
+import me.u8092.watchdog.bukkit.commands.ReloadCommand;
+import me.u8092.watchdog.bukkit.listeners.EntityDamageByEntityListener;
+import me.u8092.watchdog.bukkit.listeners.EntityDeathListener;
+import me.u8092.watchdog.bukkit.listeners.PlayerJoinListener;
+import me.u8092.watchdog.bukkit.util.DebugUtil;
+import me.u8092.watchdog.commons.variables.BooleanVariable;
+import me.u8092.watchdog.commons.variables.CountVariable;
+import me.u8092.watchdog.commons.variables.VariableHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -98,6 +98,4 @@ public class Main extends JavaPlugin {
     private void registerCommands() {
         this.getCommand("watchdogreload").setExecutor(new ReloadCommand());
     }
-
-
 }

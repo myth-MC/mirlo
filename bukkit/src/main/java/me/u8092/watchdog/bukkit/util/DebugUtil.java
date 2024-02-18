@@ -1,6 +1,6 @@
-package me.u8092.watchdog.util;
+package me.u8092.watchdog.bukkit.util;
 
-import me.u8092.watchdog.Main;
+import me.u8092.watchdog.bukkit.Main;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;

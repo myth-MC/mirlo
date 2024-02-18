@@ -1,11 +1,11 @@
-package me.u8092.watchdog.util;
+package me.u8092.watchdog.bukkit.util;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
-import me.u8092.watchdog.Main;
-import me.u8092.watchdog.variables.BooleanVariable;
-import me.u8092.watchdog.variables.CountVariable;
-import me.u8092.watchdog.variables.VariableHandler;
+import me.u8092.watchdog.bukkit.Main;
+import me.u8092.watchdog.commons.variables.BooleanVariable;
+import me.u8092.watchdog.commons.variables.CountVariable;
+import me.u8092.watchdog.commons.variables.VariableHandler;
 import org.apache.logging.log4j.util.Strings;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -140,18 +140,24 @@ public class MessagerUtil {
                 for(String increaseEvent : countVariable.getIncreaseEvents()) {
                     if(increaseEvent.equals(event)) {
                         countVariable.setValue(countVariable.getValue() + 1);
+                        if(Main.getInstance().getConfig().getBoolean("debug"))
+                            DebugUtil.info("Set CountVariable " + countVariable.getName() + " to " + countVariable.getValue() + " (" + countVariable.getOwner() + ")");
                     }
                 }
 
                 for(String decreaseEvent : countVariable.getDecreaseEvents()) {
                     if(decreaseEvent.equals(event)) {
                         countVariable.setValue(countVariable.getValue() + 1);
+                        if(Main.getInstance().getConfig().getBoolean("debug"))
+                            DebugUtil.info("Set CountVariable " + countVariable.getName() + " to " + countVariable.getValue() + " (" + countVariable.getOwner() + ")");
                     }
                 }
 
                 for(String resetEvent : countVariable.getResetEvents()) {
                     if(resetEvent.equals(event)) {
                         countVariable.setValue(countVariable.getValue() + 1);
+                        if(Main.getInstance().getConfig().getBoolean("debug"))
+                            DebugUtil.info("Set CountVariable " + countVariable.getName() + " to " + countVariable.getValue() + " (" + countVariable.getOwner() + ")");
                     }
                 }
             }
@@ -163,24 +169,32 @@ public class MessagerUtil {
                 for(String trueEvent : booleanVariable.getTrueEvents()) {
                     if(trueEvent.equals(event)) {
                         booleanVariable.setValue(true);
+                        if(Main.getInstance().getConfig().getBoolean("debug"))
+                            DebugUtil.info("Set BooleanVariable " + booleanVariable.getName() + " to " + booleanVariable.getValue() + " (" + booleanVariable.getOwner() + ")");
                     }
                 }
 
                 for(String falseEvent : booleanVariable.getFalseEvents()) {
                     if(falseEvent.equals(event)) {
                         booleanVariable.setValue(false);
+                        if(Main.getInstance().getConfig().getBoolean("debug"))
+                            DebugUtil.info("Set BooleanVariable " + booleanVariable.getName() + " to " + booleanVariable.getValue() + " (" + booleanVariable.getOwner() + ")");
                     }
                 }
 
                 for(String switchEvent : booleanVariable.getSwitchEvents()) {
                     if(switchEvent.equals(event)) {
                         booleanVariable.setValue(!booleanVariable.getValue());
+                        if(Main.getInstance().getConfig().getBoolean("debug"))
+                            DebugUtil.info("Set BooleanVariable " + booleanVariable.getName() + " to " + booleanVariable.getValue() + " (" + booleanVariable.getOwner() + ")");
                     }
                 }
 
                 for(String resetEvent : booleanVariable.getResetEvents()) {
                     if(resetEvent.equals(event)) {
                         booleanVariable.setValue(booleanVariable.getDefaultValue());
+                        if(Main.getInstance().getConfig().getBoolean("debug"))
+                            DebugUtil.info("Set BooleanVariable " + booleanVariable.getName() + " to " + booleanVariable.getValue() + " (" + booleanVariable.getOwner() + ")");
                     }
                 }
             }

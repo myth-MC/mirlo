@@ -1,4 +1,4 @@
-package me.u8092.watchdog.variables;
+package me.u8092.watchdog.commons.variables;
 
 import java.util.ArrayList;
 import java.util.List;

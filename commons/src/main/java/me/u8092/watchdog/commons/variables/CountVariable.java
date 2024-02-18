@@ -1,7 +1,4 @@
-package me.u8092.watchdog.variables;
-
-import me.u8092.watchdog.Main;
-import me.u8092.watchdog.util.DebugUtil;
+package me.u8092.watchdog.commons.variables;
 
 import java.util.List;
 
@@ -36,8 +33,5 @@ public class CountVariable {
     public List<String> getDecreaseEvents() { return decreaseEvents; }
     public List<String> getResetEvents() { return resetEvents; }
     public String getOwner() { return owner; }
-    public void setValue(int value) {
-        if(Main.getInstance().getConfig().getBoolean("debug")) DebugUtil.info("Set CountVariable " + name + " to " + value + " (" + owner + ")");
-        this.value = value;
-    }
+    public void setValue(int value) { this.value = value; }
 }

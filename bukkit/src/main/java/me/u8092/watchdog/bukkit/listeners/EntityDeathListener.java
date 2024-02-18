@@ -1,6 +1,6 @@
-package me.u8092.watchdog.listeners;
+package me.u8092.watchdog.bukkit.listeners;
 
-import me.u8092.watchdog.util.MessagerUtil;
+import me.u8092.watchdog.bukkit.util.MessagerUtil;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;

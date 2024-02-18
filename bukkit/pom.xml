@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>watchdog-bukkit</artifactId>
+    <version>1.0.0</version>
 
     <build>
         <defaultGoal>clean package</defaultGoal>
@@ -18,7 +19,7 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.5.5</version>
                 <configuration>
-                    <finalName>watchdog-bukkit_v${project.version}_${maven.build.timestamp}</finalName>
+                    <finalName>${project.artifactId}_v${parent.version}_${maven.build.timestamp}</finalName>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
@@ -34,6 +35,17 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>default-jar</id>
+                        <!-- put the default-jar in the none phase to skip it from being created -->
+                        <phase>none</phase>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -45,4 +57,25 @@
         <maven.build.timestamp.format>MMddyy_HHmm</maven.build.timestamp.format>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>paper-repo</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>me.u8092</groupId>
+            <artifactId>watchdog-commons</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.20.4-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>
