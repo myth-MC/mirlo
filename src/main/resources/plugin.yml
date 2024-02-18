@@ -5,6 +5,8 @@ author: U8092
 website: https://mythmc.ovh/
 api-version: '1.20'
 commands:
-  kit:
-    description: Debug
+  watchdogreload:
+    description: Reload config.yml
+    permission: watchdog.reload
+    permission-message: You don't have enough permission.
     usage: /<command>
