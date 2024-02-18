@@ -13,7 +13,6 @@ import me.u8092.watchdog.listeners.PlayerJoinListener;
 import me.u8092.watchdog.variables.BooleanVariable;
 import me.u8092.watchdog.variables.IntVariable;
 import me.u8092.watchdog.variables.VariableHandler;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;

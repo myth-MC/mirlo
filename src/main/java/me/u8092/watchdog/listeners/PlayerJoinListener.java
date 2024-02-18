@@ -9,8 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import java.util.Objects;
-
 public class PlayerJoinListener implements Listener {
     private final FileConfiguration configuration = Main.getInstance().getConfig();
     

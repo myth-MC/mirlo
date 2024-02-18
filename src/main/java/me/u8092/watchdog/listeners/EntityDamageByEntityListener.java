@@ -1,7 +1,5 @@
 package me.u8092.watchdog.listeners;
 
-import me.u8092.alzalibs.clans.ClansAPI;
-import me.u8092.alzalibs.users.UsersAPI;
 import me.u8092.watchdog.Main;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
