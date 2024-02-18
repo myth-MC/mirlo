@@ -34,7 +34,6 @@ public class EntityDeathListener implements Listener {
                             if(increaseEvent.equals("PLAYER_DEATH_EVENT")) {
                                 IntVariable intVariable = VariableHandler.getIntVariable(victim.getName(), variable);
                                 intVariable.setValue(intVariable.getValue() + 1);
-                                System.out.print(intVariable);
                             }
 
                             if(increaseEvent.equals("PLAYER_KILL_EVENT")) {
@@ -70,7 +69,9 @@ public class EntityDeathListener implements Listener {
                 }
 
                 for(String channel : Objects.requireNonNull(configuration.getConfigurationSection("channels")).getKeys(false)) {
+                    System.out.print(channel);
                     for(String sendEvents : configuration.getStringList("channels." + channel + ".send")) {
+                        System.out.print(sendEvents);
                         List<String> fullEvent = List.of(sendEvents.split(","));
 
                         //DEBUG
