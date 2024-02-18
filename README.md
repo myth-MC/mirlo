@@ -60,8 +60,6 @@ Events listen for specific actions that happen in the game. Right now you can us
 * **PLAYER_KILLS_PLAYER_EVENT** (player, targetPlayer): triggered whenever a player kills another player.
 * **PLAYER_KILLS_CREATURE_EVENT** (player): triggered whenever a player kills a mob.
 * **PLAYER_DEATH_EVENT** (targetPlayer): triggered whenever a player dies.
-* **CREATURE_KILLS_PLAYER_EVENT** (targetPlayer): triggered whenever a mob kills a player.
-* **OTHER_KILLS_PLAYER_EVENT** (targetPlayer): triggered whenever a player dies in strange conditions.
 
 ### Variables
 
