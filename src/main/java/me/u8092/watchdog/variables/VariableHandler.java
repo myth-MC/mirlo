@@ -1,10 +1,11 @@
 package me.u8092.watchdog.variables;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VariableHandler {
-    private static List<IntVariable> intVariables;
-    private static List<BooleanVariable> booleanVariables;
+    private static List<IntVariable> intVariables = new ArrayList<>();
+    private static List<BooleanVariable> booleanVariables = new ArrayList<>();
 
     public static List<BooleanVariable> getBooleanVariables() {
         return booleanVariables;
