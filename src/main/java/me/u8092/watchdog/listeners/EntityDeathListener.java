@@ -70,6 +70,8 @@ public class EntityDeathListener implements Listener {
                 }
                    */
                 for(String channel : configuration.getConfigurationSection("channels").getKeys(false)) {
+                    System.out.println(channel);
+
                     for(String sendEvents : configuration.getStringList("channels." + channel + ".send")) {
                         List<String> fullEvent = List.of(sendEvents.split(","));
 
@@ -99,6 +101,7 @@ public class EntityDeathListener implements Listener {
                         }
 
                         if(fullEvent.get(0).equals("PLAYER_KILL_EVENT")) {
+                            System.out.println(fullEvent.size());
                             if(fullEvent.size() > 1) {
                                 String joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
 
