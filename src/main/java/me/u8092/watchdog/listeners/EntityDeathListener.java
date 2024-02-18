@@ -72,9 +72,6 @@ public class EntityDeathListener implements Listener {
                 for(String channel : configuration.getConfigurationSection("channels").getKeys(true)) {
                     for(String sendEvents : configuration.getStringList("channels." + channel + ".send")) {
                         List<String> fullEvent = List.of(sendEvents.split(","));
-                        System.out.println(fullEvent);
-
-                        System.out.println(fullEvent.get(0));
 
                         if(fullEvent.get(0).equals("PLAYER_DEATH_EVENT")) {
                             if(fullEvent.size() > 1) {
@@ -82,7 +79,7 @@ public class EntityDeathListener implements Listener {
 
                                 System.out.println(joinedArgs);
 
-                                for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables")).getKeys(false)) {
+                                for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables")).getKeys(true)) {
                                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
                                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
                                         int value = VariableHandler.getIntVariable(victim.getName(), variable).getValue();
@@ -108,9 +105,8 @@ public class EntityDeathListener implements Listener {
                             if(fullEvent.size() > 1) {
                                 String joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
 
-                                System.out.println(joinedArgs);
-
-                                for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables")).getKeys(false)) {
+                                for(String variable : Objects.requireNonNull(configuration.getConfigurationSection("variables")).getKeys(true)) {
+                                    System.out.println(variable);
                                     if(!(configuration.getString("variables." + variable + ".scope").equals("player"))) return;
                                     if(configuration.getString("variables." + variable + ".type").equals("int")) {
                                         int value = VariableHandler.getIntVariable(killer.getName(), variable).getValue();
