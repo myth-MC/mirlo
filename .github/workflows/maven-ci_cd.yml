@@ -44,12 +44,15 @@ jobs:
             distribution: 'temurin'
             java-version: 17
         - run: mvn -B package --file pom.xml -DskipTests 
+        - name: get-pom-version
+          id: pom-version
+          uses: CptMokoena/maven-get-version-action@master
         - run: mkdir staging && cp bukkit/target/*.jar staging
         - uses: "marvinpinto/action-automatic-releases@latest"
           with:
             repo_token: "${{ secrets.GITHUB_TOKEN }}"
-            automatic_release_tag: "latest"
+            automatic_release_tag: "${{ steps.pom-version.outputs.version }}"
             prerelease: true
-            title: "Development Build"
+            title: "mirlo v${{ steps.pom-version.outputs.version }}"
             files: |
               staging/*.jar
