@@ -66,7 +66,12 @@ Repeat the steps for every backend of your network.
 
 ## 🖊️ Usage
 
-When you run mirlo for the first time it will generate a `config.yml` file under `/plugins/mirlo`. This file contains everything you might want to modify depending on your server's needs.
+When you run mirlo for the very first time it will automatically generate three different configurable files that can be adjusted depending on your server's needs:
+* `settings.yml` contains general settings
+* `channels.yml` contains every channel to listen for
+* `variables.yml` contains every variable
+
+Every file has one or more examples with hints.
 
 ### Events
 
@@ -90,32 +95,9 @@ Channels are the mean of communication where information will be exchanged with 
 #### Placeholders
 
 You can use placeholders when sending or receiving a plugin message from a specific channel. Valid placeholders are:
-* Pre-defined variables (config.yml)
+* Pre-defined variables (variables.yml)
 * `player`
 * `targetPlayer`
-
-### Example _config.yml_ with hints
-
-```yaml
-variables:
-  streak: # Variable "streak"
-    type: count # Can be count or boolean
-    scope: player # This variable will be unique for every player. Change to "global" if you want it to be the same for every player
-    default: 0 # The default value whenever "streak" is resetted
-    increase: # When should "streak" increase
-      - PLAYER_KILLS_PLAYER_EVENT # A player kills another player
-    decrease: [] # When should "streak" decrease. (never in this case)
-    reset: # When should "streak" return to its default value
-      - PLAYER_DEATH_EVENT # A player dies
-
-channels:
-  players: # Channel "mirlo:players"
-    target: proxy # Where should messages from this channels be sent (survival, skywars, etc) (set to all if message should be sent to every backend)
-    send: # What events should be sent
-      - PLAYER_KILLS_PLAYER_EVENT,streak
-      - PLAYER_DEATH_EVENT
-    receive: [] # Won't do anything for now
-```
 
 <div id="api"></div>
 
