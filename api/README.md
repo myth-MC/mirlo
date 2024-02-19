@@ -11,24 +11,25 @@ Before starting to actually use the API, you will have to add the [JitPack](http
 ```xml
 	<repositories>
 		<repository>
-		    <id>jitpack.io</id>
-		    <url>https://jitpack.io</url>
-		</repository>
+		    	<id>jitpack.io</id>
+		    	<url>https://jitpack.io</url>
+			</repository>
 	</repositories>
 
   ...
-
-	<dependency>
-	    <groupId>com.github.myth-MC.mirlo</groupId>
-	    <artifactId>mirlo-api</artifactId>
-	    <version>0.3.0</version>
-	</dependency>
+	<dependencies>
+		<dependency>
+			<groupId>com.github.myth-MC.mirlo</groupId>
+		    	<artifactId>mirlo-api</artifactId>
+		    	<version>0.3.0</version>
+		</dependency>
+	</dependencies>
 ```
 
 You can access all the main API functions by using `Mirlo.get()`.
 
 ## Listening to events
-**mirlo** provides an easy way to integrate events across different platforms by using its built-in event system. Let's start by creating a `MirloEventListener`:
+**mirlo-api** provides an easy way to integrate events across different platforms by using its built-in event system. Let's start by creating a `MirloEventListener`:
 
 ```java
 import me.u8092.mirlo.api.event.MirloEvent;
