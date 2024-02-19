@@ -1,7 +1,7 @@
 <div align="center">
   <p>
     <h1>mirlo 🐦‍⬛</h1>
-    A simple approach to [plugin messaging](https://web.archive.org/web/20220711204310/https://dinnerbone.com/blog/2012/01/13/minecraft-plugin-channels-messaging/)
+    A simple approach to <a href="https://web.archive.org/web/20220711204310/https://dinnerbone.com/blog/2012/01/13/minecraft-plugin-channels-messaging/">plugin messaging</a>
   </p>
 </div>
 
