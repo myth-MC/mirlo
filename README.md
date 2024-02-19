@@ -1,12 +1,17 @@
 <div align="center">
   <p>
     <h1>mirlo 🐦‍⬛</h1>
+    <a href="https://github.com/myth-MC/mirlo/releases/latest"><img src="https://img.shields.io/github/v/release/myth-MC/mirlo?include_prereleases" alt="Latest release" /></a>
+    <a href="https://github.com/myth-MC/mirlo/pulls"><img src="https://img.shields.io/github/issues-pr/myth-MC/mirlo" alt="Pull requests" /></a>
+    <a href="https://github.com/myth-MC/mirlo/issues"><img src="https://img.shields.io/github/issues/myth-MC/mirlo" alt="Issues" /></a>
+    <a href="https://github.com/myth-MC/mirlo/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-blue.svg" alt="License" /></a>
+    <br>
     A simple approach to <a href="https://web.archive.org/web/20220711204310/https://dinnerbone.com/blog/2012/01/13/minecraft-plugin-channels-messaging/">plugin messaging</a>
   </p>
 </div>
 
 <details open="open">
-  <summary>Table of contents</summary>
+  <summary>Quick navigation</summary>
   <ol>
     <li>
       <a href="#information">Information</a>
@@ -18,6 +23,9 @@
       <a href="#usage">Usage</a>
     </li>
     <li>
+      <a href="#api">API</a>
+    </li>
+    <li>
       <a href="#credits">Credits</a>
     </li>
   </ol>
@@ -25,7 +33,7 @@
 
 <div id="information"></div>
 
-## Information
+## 📚 Information
 
 **mirlo 🐦‍⬛** provides server owners with a simple way of implementing and handling plugin messaging between a proxy and its backends (check [Usage](#usage)).
 
@@ -46,7 +54,7 @@
 
 <div id="installation"></div>
 
-## Installation
+## 📥 Installation
 
 1. **Download the mirlo jar file for your platform**. You can find the latest version on [our releases page](https://github.com/myth-MC/mirlo/releases).
 2. **Add the mirlo jar file to your server's plugin folder**. Make sure to delete any older versions of mirlo.
@@ -56,7 +64,7 @@ Repeat the steps for every backend of your network.
 
 <div id="usage"></div>
 
-## Usage
+## 🖊️ Usage
 
 When you run mirlo for the first time it will generate a `config.yml` file under `/plugins/mirlo`. This file contains everything you might want to modify depending on your server's needs.
 
@@ -109,7 +117,14 @@ channels:
     receive: [] # Won't do anything for now
 ```
 
+<div id="api"></div>
+
+## ⚙️ API
+**mirlo** exposes a simple API via the `Mirlo.get()` method.
+
+You can check [our guide on using mirlo-api](https://github.com/myth-MC/mirlo/blob/0.3.0-dev/api/README.md/).
+
 <div id="credits"></div>
 
-## Credits
+## 📜 Credits
 * Events API is taken from [Sonar](https://github.com/jonesdevelopment/sonar/tree/main).
