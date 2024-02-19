@@ -1,6 +1,9 @@
-# mirlo 🐦‍⬛
-
-### A simple approach to [plugin messaging](https://web.archive.org/web/20220711204310/https://dinnerbone.com/blog/2012/01/13/minecraft-plugin-channels-messaging/)
+<div align="center">
+  <p>
+    <h1>mirlo 🐦‍⬛</h1>
+    A simple approach to [plugin messaging](https://web.archive.org/web/20220711204310/https://dinnerbone.com/blog/2012/01/13/minecraft-plugin-channels-messaging/)
+  </p>
+</div>
 
 <details open="open">
   <summary>Table of contents</summary>
@@ -13,6 +16,9 @@
     </li>
     <li>
       <a href="#usage">Usage</a>
+    </li>
+    <li>
+      <a href="#credits">Credits</a>
     </li>
   </ol>
 </details>
@@ -102,3 +108,8 @@ channels:
       - PLAYER_DEATH_EVENT
     receive: [] # Won't do anything for now
 ```
+
+<div id="credits"></div>
+
+## Credits
+* Events API is taken from [Sonar](https://github.com/jonesdevelopment/sonar/tree/main).

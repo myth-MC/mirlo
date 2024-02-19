@@ -6,7 +6,7 @@
     <parent>
         <groupId>me.u8092</groupId>
         <artifactId>mirlo</artifactId>
-        <version>0.2.0e</version>
+        <version>0.3.0a</version>
     </parent>
 
     <artifactId>mirlo-bukkit</artifactId>
@@ -67,7 +67,7 @@
     <dependencies>
         <dependency>
             <groupId>me.u8092</groupId>
-            <artifactId>mirlo-commons</artifactId>
+            <artifactId>mirlo-common</artifactId>
             <version>1.0.0</version>
         </dependency>
 

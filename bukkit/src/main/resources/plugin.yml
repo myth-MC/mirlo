@@ -1,6 +1,6 @@
 name: mirlo
-version: 0.2.0e
-main: me.u8092.mirlo.bukkit.Main
+version: 0.3.0
+main: me.u8092.mirlo.bukkit.MirloBukkitPlugin
 author: U8092
 website: https://mythmc.ovh/
 api-version: '1.20'

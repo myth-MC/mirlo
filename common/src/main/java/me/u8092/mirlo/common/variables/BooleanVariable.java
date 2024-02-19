@@ -1,16 +1,14 @@
-package me.u8092.mirlo.commons.variables;
+package me.u8092.mirlo.common.variables;
 
 import java.util.List;
 
-public class BooleanVariable {
-    private String name;
+public class BooleanVariable extends Variable {
     private boolean value;
     private boolean defaultValue;
     private List<String> trueEvents;
     private List<String> falseEvents;
     private List<String> switchEvents;
     private List<String> resetEvents;
-    private String owner;
 
     public BooleanVariable(String name,
                            boolean value,
@@ -19,17 +17,15 @@ public class BooleanVariable {
                            List<String> switchEvents,
                            List<String> resetEvents,
                            String owner) {
-        this.name = name;
+        super(name, owner);
         this.value = value;
         this.defaultValue = value;
         this.trueEvents = trueEvents;
         this.falseEvents = falseEvents;
         this.switchEvents = switchEvents;
         this.resetEvents = resetEvents;
-        this.owner = owner;
     }
 
-    public String getName() { return name; }
     public boolean getValue() { return value; }
     public boolean getDefaultValue() { return defaultValue; }
     public void setValue(boolean value) { this.value = value; }
@@ -37,5 +33,4 @@ public class BooleanVariable {
     public List<String> getFalseEvents() { return falseEvents; }
     public List<String> getSwitchEvents() { return switchEvents; }
     public List<String> getResetEvents() { return resetEvents; }
-    public String getOwner() { return owner; }
 }

@@ -1,4 +1,4 @@
-package me.u8092.mirlo.commons.variables;
+package me.u8092.mirlo.common.variables;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,4 +58,8 @@ public class VariableHandler {
     public static void addCountVariable(CountVariable countVariable) {
         countVariables.add(countVariable);
     }
+
+    public static void removeBooleanVariable(BooleanVariable booleanVariable) { booleanVariables.remove(booleanVariable); }
+
+    public static void removeCountVariable(CountVariable countVariable) { countVariables.remove(countVariable); }
 }

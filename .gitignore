@@ -1,0 +1,33 @@
+# GitHub
+.github/
+HEADER
+LICENSE
+.*ignore
+.*config
+.*attributes
+
+# Editor configurations
+.idea/
+.gradle/
+vscode/
+.fleet/
+
+# Build directories
+api/target/
+bukkit/target/
+commons/target/
+
+# Other files
+*.bat
+*.cmd
+*.jar
+*.class
+*.iml
+*.exe
+*.png
+*.jpg
+*.jpeg
+*.log
+*.yml
+*.svg
+*.txt

@@ -1,17 +1,17 @@
 package me.u8092.mirlo.bukkit.listeners;
 
+import me.u8092.mirlo.bukkit.MirloBukkit;
 import me.u8092.mirlo.bukkit.util.DebugUtil;
-import me.u8092.mirlo.bukkit.Main;
-import me.u8092.mirlo.commons.variables.BooleanVariable;
-import me.u8092.mirlo.commons.variables.CountVariable;
-import me.u8092.mirlo.commons.variables.VariableHandler;
+import me.u8092.mirlo.common.variables.BooleanVariable;
+import me.u8092.mirlo.common.variables.CountVariable;
+import me.u8092.mirlo.common.variables.VariableHandler;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoinListener implements Listener {
-    private final FileConfiguration configuration = Main.getInstance().getConfig();
+    private final FileConfiguration configuration = MirloBukkit.INSTANCE.getPlugin().getConfig();
     
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
@@ -31,7 +31,7 @@ public class PlayerJoinListener implements Listener {
                             playerName
                     ));
 
-                    if(Main.getInstance().getConfig().getBoolean("debug")) DebugUtil.info("Registered new CountVariable '" + variable + "' for " + playerName);
+                    if(MirloBukkit.INSTANCE.getPlugin().getConfig().getBoolean("debug")) DebugUtil.info("Registered new CountVariable '" + variable + "' for " + playerName);
                 }
 
                 if(configuration.getString("variables." + variable + ".type").equals("boolean")) {
@@ -45,7 +45,7 @@ public class PlayerJoinListener implements Listener {
                             playerName
                     ));
 
-                    if(Main.getInstance().getConfig().getBoolean("debug")) DebugUtil.info("Registered new BooleanVariable '" + variable + "' for " + playerName);
+                    if(MirloBukkit.INSTANCE.getPlugin().getConfig().getBoolean("debug")) DebugUtil.info("Registered new BooleanVariable '" + variable + "' for " + playerName);
                 }
             }
         }

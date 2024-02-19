@@ -6,10 +6,10 @@
     <parent>
         <groupId>me.u8092</groupId>
         <artifactId>mirlo</artifactId>
-        <version>0.2.0e</version>
+        <version>0.3.0a</version>
     </parent>
 
-    <artifactId>mirlo-commons</artifactId>
+    <artifactId>mirlo-api</artifactId>
     <version>1.0.0</version>
 
     <properties>
@@ -17,4 +17,13 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>24.1.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 </project>
