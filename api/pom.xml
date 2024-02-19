@@ -6,7 +6,7 @@
     <parent>
         <groupId>me.u8092</groupId>
         <artifactId>mirlo</artifactId>
-        <version>0.3.0a</version>
+        <version>0.3.0b</version>
     </parent>
 
     <artifactId>mirlo-api</artifactId>
@@ -20,10 +20,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>24.1.0</version>
-            <scope>compile</scope>
+            <groupId>com.github.Carleslc.Simple-YAML</groupId>
+            <artifactId>Simple-Yaml</artifactId>
+            <version>1.8.4</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 </project>

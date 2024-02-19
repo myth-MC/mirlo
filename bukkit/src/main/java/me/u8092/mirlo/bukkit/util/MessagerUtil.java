@@ -9,18 +9,17 @@ import me.u8092.mirlo.common.variables.BooleanVariable;
 import me.u8092.mirlo.common.variables.CountVariable;
 import me.u8092.mirlo.common.variables.VariableHandler;
 import org.apache.logging.log4j.util.Strings;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.simpleyaml.configuration.ConfigurationSection;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-// Todo: move to commons
+// Todo: move to api
 public class MessagerUtil {
-    private static final FileConfiguration configuration = MirloBukkit.INSTANCE.getPlugin().getConfig();
-    private static final boolean DEBUG = configuration.getBoolean("debug");
-
+    private static final boolean DEBUG = Mirlo.get().getConfig().getSettings().isDebug();
+    
     public static byte[] byteArray(List<String> bytes) {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         for(String b : bytes) {
@@ -49,37 +48,30 @@ public class MessagerUtil {
             DebugUtil.info("Event '" + event + "' called");
         }
 
-        for(String channel : configuration.getConfigurationSection("channels").getKeys(false)) {
-            for(String unformattedEvent : configuration.getStringList("channels." + channel + ".send")) {
+        ConfigurationSection section = Mirlo.get().getConfig().getChannels().getSection();
+        for(String channel : section.getKeys(false)) {
+            for(String unformattedEvent : section.getStringList(channel + ".send")) {
                 List<String> fullEvent = List.of(unformattedEvent.split(","));
                 if(fullEvent.contains(event)) channelsToSendMessage.add(channel);
             }
         }
-
-        // Replace variables
+        
         for(String channel : channelsToSendMessage) {
-            for(BooleanVariable booleanVariable : VariableHandler.getBooleanVariables()) {
-                if(!booleanVariable.getOwner().equals(player.getName()) && !booleanVariable.getOwner().equals("global")) continue;
+            for(String unformattedEvent : section.getStringList(channel + ".send")) {
+                List<String> fullEvent = List.of(unformattedEvent.split(","));
 
-                for(String unformattedEvent : configuration.getStringList("channels." + channel + ".send")) {
-                    List<String> fullEvent = List.of(unformattedEvent.split(","));
+                if(fullEvent.get(0).equals(event) && fullEvent.size() > 1) {
+                    joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
 
-                    if(fullEvent.get(0).equals(event) && fullEvent.size() > 1) {
-                        joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
+                    // if variable instanceof BooleanVariable
+                    for(BooleanVariable booleanVariable : VariableHandler.getBooleanVariables()) {
+                        if(!booleanVariable.getOwner().equals(player.getName()) && !booleanVariable.getOwner().equals("global")) continue;
 
                         joinedArgs = joinedArgs.replace(booleanVariable.getName(), String.valueOf(booleanVariable.getValue()));
                     }
-                }
-            }
 
-            for(CountVariable countVariable : VariableHandler.getCountVariables()) {
-                if(!countVariable.getOwner().equals(player.getName()) && !countVariable.getOwner().equals("global")) continue;
-
-                for(String unformattedEvent : configuration.getStringList("channels." + channel + ".send")) {
-                    List<String> fullEvent = List.of(unformattedEvent.split(","));
-
-                    if(fullEvent.get(0).equals(event) && fullEvent.size() > 1) {
-                        joinedArgs = Strings.join(fullEvent.subList(1, fullEvent.size()), ',');
+                    for(CountVariable countVariable : VariableHandler.getCountVariables()) {
+                        if(!countVariable.getOwner().equals(player.getName()) && !countVariable.getOwner().equals("global")) continue;
 
                         joinedArgs = joinedArgs.replace(countVariable.getName(), String.valueOf(countVariable.getValue()));
                     }
@@ -114,15 +106,17 @@ public class MessagerUtil {
     }
 
     public static void updateVariables(String event, String varOwner) {
-        for(String variable : configuration.getConfigurationSection("variables").getKeys(false)) {
-            if(configuration.getString("variables." + variable + ".type").equals("count")) {
-                CountVariable countVariable = VariableHandler.getCountVariable(varOwner, configuration.getString("variables." + variable + ".name"));
+        ConfigurationSection section = Mirlo.get().getConfig().getVariables().getSection();
+
+        for(String variable : section.getKeys(false)) {
+            if(section.getString(variable + ".type").equals("count")) {
+                CountVariable countVariable = VariableHandler.getCountVariable(varOwner, section.getString(variable + ".name"));
                 if(countVariable == null) continue;
 
                 for(String increaseEvent : countVariable.getIncreaseEvents()) {
                     if(increaseEvent.equals(event)) {
                         countVariable.setValue(countVariable.getValue() + 1);
-                        if(MirloBukkit.INSTANCE.getPlugin().getConfig().getBoolean("debug"))
+                        if(DEBUG)
                             DebugUtil.info("Set CountVariable " + countVariable.getName() + " to " + countVariable.getValue() + " (" + countVariable.getOwner() + ")");
                     }
                 }
@@ -130,7 +124,7 @@ public class MessagerUtil {
                 for(String decreaseEvent : countVariable.getDecreaseEvents()) {
                     if(decreaseEvent.equals(event)) {
                         countVariable.setValue(countVariable.getValue() + 1);
-                        if(MirloBukkit.INSTANCE.getPlugin().getConfig().getBoolean("debug"))
+                        if(DEBUG)
                             DebugUtil.info("Set CountVariable " + countVariable.getName() + " to " + countVariable.getValue() + " (" + countVariable.getOwner() + ")");
                     }
                 }
@@ -138,20 +132,20 @@ public class MessagerUtil {
                 for(String resetEvent : countVariable.getResetEvents()) {
                     if(resetEvent.equals(event)) {
                         countVariable.setValue(countVariable.getValue() + 1);
-                        if(MirloBukkit.INSTANCE.getPlugin().getConfig().getBoolean("debug"))
+                        if(DEBUG)
                             DebugUtil.info("Set CountVariable " + countVariable.getName() + " to " + countVariable.getValue() + " (" + countVariable.getOwner() + ")");
                     }
                 }
             }
 
-            if(configuration.getString("variables." + variable + ".type").equals("boolean")) {
-                BooleanVariable booleanVariable = VariableHandler.getBooleanVariable(varOwner, configuration.getString("variables." + variable + ".name"));
+            if(section.getString(variable + ".type").equals("boolean")) {
+                BooleanVariable booleanVariable = VariableHandler.getBooleanVariable(varOwner, section.getString(variable + ".name"));
                 if(booleanVariable == null) continue;
 
                 for(String trueEvent : booleanVariable.getTrueEvents()) {
                     if(trueEvent.equals(event)) {
                         booleanVariable.setValue(true);
-                        if(MirloBukkit.INSTANCE.getPlugin().getConfig().getBoolean("debug"))
+                        if(DEBUG)
                             DebugUtil.info("Set BooleanVariable " + booleanVariable.getName() + " to " + booleanVariable.getValue() + " (" + booleanVariable.getOwner() + ")");
                     }
                 }
@@ -159,7 +153,7 @@ public class MessagerUtil {
                 for(String falseEvent : booleanVariable.getFalseEvents()) {
                     if(falseEvent.equals(event)) {
                         booleanVariable.setValue(false);
-                        if(MirloBukkit.INSTANCE.getPlugin().getConfig().getBoolean("debug"))
+                        if(DEBUG)
                             DebugUtil.info("Set BooleanVariable " + booleanVariable.getName() + " to " + booleanVariable.getValue() + " (" + booleanVariable.getOwner() + ")");
                     }
                 }
@@ -167,7 +161,7 @@ public class MessagerUtil {
                 for(String switchEvent : booleanVariable.getSwitchEvents()) {
                     if(switchEvent.equals(event)) {
                         booleanVariable.setValue(!booleanVariable.getValue());
-                        if(MirloBukkit.INSTANCE.getPlugin().getConfig().getBoolean("debug"))
+                        if(DEBUG)
                             DebugUtil.info("Set BooleanVariable " + booleanVariable.getName() + " to " + booleanVariable.getValue() + " (" + booleanVariable.getOwner() + ")");
                     }
                 }
@@ -175,7 +169,7 @@ public class MessagerUtil {
                 for(String resetEvent : booleanVariable.getResetEvents()) {
                     if(resetEvent.equals(event)) {
                         booleanVariable.setValue(booleanVariable.getDefaultValue());
-                        if(MirloBukkit.INSTANCE.getPlugin().getConfig().getBoolean("debug"))
+                        if(DEBUG)
                             DebugUtil.info("Set BooleanVariable " + booleanVariable.getName() + " to " + booleanVariable.getValue() + " (" + booleanVariable.getOwner() + ")");
                     }
                 }

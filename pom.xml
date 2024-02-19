@@ -6,7 +6,7 @@
 
     <groupId>me.u8092</groupId>
     <artifactId>mirlo</artifactId>
-    <version>0.3.0a</version>
+    <version>0.3.0b</version>
     <packaging>pom</packaging>
     <modules>
         <module>bukkit</module>
@@ -20,11 +20,24 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>jitpack</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.30</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>24.1.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

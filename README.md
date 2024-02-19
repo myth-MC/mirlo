@@ -127,4 +127,4 @@ You can check [our guide on using mirlo-api](https://github.com/myth-MC/mirlo/bl
 <div id="credits"></div>
 
 ## 📜 Credits
-* Events API is taken from [Sonar](https://github.com/jonesdevelopment/sonar/tree/main).
+* Events API and config is taken from [Sonar](https://github.com/jonesdevelopment/sonar/tree/main).

@@ -1,25 +1,20 @@
 package me.u8092.mirlo.bukkit.commands;
 
+import me.u8092.mirlo.api.Mirlo;
 import me.u8092.mirlo.bukkit.MirloBukkit;
 import me.u8092.mirlo.bukkit.util.DebugUtil;
-import me.u8092.mirlo.common.variables.BooleanVariable;
-import me.u8092.mirlo.common.variables.CountVariable;
-import me.u8092.mirlo.common.variables.VariableHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 public class ReloadCommand implements CommandExecutor {
-    private static final FileConfiguration configuration = MirloBukkit.INSTANCE.getPlugin().getConfig();
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!sender.hasPermission("mirlo.reload")) return false;
 
-        MirloBukkit.INSTANCE.getPlugin().reloadConfig();
+        Mirlo.get().reload();
 
         for(Player player : Bukkit.getOnlinePlayers()) {
             reloadVariables(player.getName());
@@ -33,6 +28,7 @@ public class ReloadCommand implements CommandExecutor {
     }
 
     private void reloadVariables(String varOwner) {
+        /*
         for(BooleanVariable booleanVariable : VariableHandler.getBooleanVariables(varOwner)) {
             BooleanVariable newBooleanVariable =
                     new BooleanVariable(
@@ -63,5 +59,7 @@ public class ReloadCommand implements CommandExecutor {
             VariableHandler.removeCountVariable(countVariable);
             VariableHandler.addCountVariable(newCountVariable);
         }
+
+         */
     }
 }

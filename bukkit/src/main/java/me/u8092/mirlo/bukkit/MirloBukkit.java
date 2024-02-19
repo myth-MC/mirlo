@@ -14,8 +14,7 @@ import me.u8092.mirlo.common.variables.BooleanVariable;
 import me.u8092.mirlo.common.variables.CountVariable;
 import me.u8092.mirlo.common.variables.VariableHandler;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
+import org.simpleyaml.configuration.ConfigurationSection;
 
 @Getter
 public final class MirloBukkit extends MirloBootstrap<MirloBukkitPlugin> {
@@ -23,7 +22,7 @@ public final class MirloBukkit extends MirloBootstrap<MirloBukkitPlugin> {
     private static boolean isPaper;
 
     public MirloBukkit(final @NotNull MirloBukkitPlugin plugin) {
-        super(plugin);
+        super(plugin, plugin.getDataFolder());
         INSTANCE = this;
     }
 
@@ -46,8 +45,6 @@ public final class MirloBukkit extends MirloBootstrap<MirloBukkitPlugin> {
 
     @Override
     public void enable() {
-        INSTANCE.getPlugin().saveDefaultConfig();
-
         try {
             Class.forName("net.kyori.adventure.Adventure");
             isPaper = true;
@@ -66,41 +63,42 @@ public final class MirloBukkit extends MirloBootstrap<MirloBukkitPlugin> {
     public static boolean isPaper() { return isPaper; }
 
     private void registerChannels() {
-        for(String channel : Objects.requireNonNull(INSTANCE.getPlugin().getConfig().getConfigurationSection("channels")).getKeys(false)) {
+        for(String channel : Mirlo.get().getConfig().getChannels().getSection().getKeys(false)) {
             INSTANCE.getPlugin().getServer().getMessenger().registerOutgoingPluginChannel(INSTANCE.getPlugin(), "mirlo:" + channel);
 
-            if(INSTANCE.getPlugin().getConfig().getBoolean("debug")) DebugUtil.info("Registered plugin channel with ID 'mirlo:" + channel + "'");
+            if(Mirlo.get().getConfig().getSettings().isDebug()) DebugUtil.info("Registered plugin channel with ID 'mirlo:" + channel + "'");
         }
     }
 
     private void registerGlobalVariables() {
-        for(String variable : Objects.requireNonNull(INSTANCE.getPlugin().getConfig().getConfigurationSection("variables")).getKeys(false)) {
-            if(INSTANCE.getPlugin().getConfig().getString("variables." + variable + ".scope").equals("global")) {
-                if(INSTANCE.getPlugin().getConfig().getString("variables." + variable + ".type").equals("count")) {
+        ConfigurationSection section = Mirlo.get().getConfig().getVariables().getSection();
+        for(String variable : section.getKeys(false)) {
+            if(section.getString(variable + ".scope").equals("global")) {
+                if(section.getString(variable + ".type").equals("count")) {
                     VariableHandler.addCountVariable(new CountVariable(
                             variable,
-                            INSTANCE.getPlugin(). getConfig().getInt("variables." + variable + ".default"),
-                            INSTANCE.getPlugin().getConfig().getStringList("variables." + variable + ".increase"),
-                            INSTANCE.getPlugin().getConfig().getStringList("variables." + variable + ".decrease"),
-                            INSTANCE.getPlugin().getConfig().getStringList("variables." + variable + ".reset"),
+                            section.getInt(variable + ".default"),
+                            section.getStringList(variable + ".increase"),
+                            section.getStringList(variable + ".decrease"),
+                            section.getStringList(variable + ".reset"),
                             "global"
                     ));
 
-                    if(INSTANCE.getPlugin().getConfig().getBoolean("debug")) DebugUtil.info("Registered new global CountVariable '" + variable + "'");
+                    if(Mirlo.get().getConfig().getSettings().isDebug()) DebugUtil.info("Registered new global CountVariable '" + variable + "'");
                 }
 
-                if(INSTANCE.getPlugin().getConfig().getString("variables." + variable + ".type").equals("boolean")) {
+                if(section.getString(variable + ".type").equals("boolean")) {
                     VariableHandler.addBooleanVariable(new BooleanVariable(
                             variable,
-                            INSTANCE.getPlugin().getConfig().getBoolean("variables." + variable + ".default"),
-                            INSTANCE.getPlugin().getConfig().getStringList("variables." + variable + ".true"),
-                            INSTANCE.getPlugin().getConfig().getStringList("variables." + variable + ".false"),
-                            INSTANCE.getPlugin().getConfig().getStringList("variables." + variable + ".switch"),
-                            INSTANCE.getPlugin().getConfig().getStringList("variables." + variable + ".reset"),
+                            section.getBoolean(variable + ".default"),
+                            section.getStringList(variable + ".true"),
+                            section.getStringList(variable + ".false"),
+                            section.getStringList(variable + ".switch"),
+                            section.getStringList(variable + ".reset"),
                             "global"
                     ));
 
-                    if(INSTANCE.getPlugin().getConfig().getBoolean("debug")) DebugUtil.info("Registered new global BooleanVariable '" + variable + "'");
+                    if(Mirlo.get().getConfig().getSettings().isDebug()) DebugUtil.info("Registered new global BooleanVariable '" + variable + "'");
                 }
             }
         }
