@@ -44,13 +44,14 @@
 
 |                                                         | Compatible? | Version |
 |---------------------------------------------------------|-------------|---------|
-| [Velocity](https://papermc.io/software/velocity)        | ❌          |         |
+| [Velocity](https://papermc.io/software/velocity)        | ✅          | 3.3.0   |
 | [BungeeCord](https://www.spigotmc.org/wiki/bungeecord/) | ❌          |         |
-| [Paper](https://papermc.io/)                            | ✅          | 1.20+   |
-| [PurpurMC](https://purpurmc.org/)                       | ✅          | 1.20+   |
-| [Spigot](https://www.spigotmc.org)                      | ✅          | 1.20+   |
-| [Bukkit](https://bukkit.org)                            | ✅          | 1.20+   |
+| [Paper](https://papermc.io/)                            | ✅          | 1.13+   |
+| [PurpurMC](https://purpurmc.org/)                       | ✅          | 1.13+   |
+| [Spigot](https://www.spigotmc.org)                      | ✅          | 1.13+   |
+| [Bukkit](https://bukkit.org)                            | ✅          | 1.13+   |
 | [Folia](https://papermc.io/software/folia)              | ❌          |         |
+| [Minestom](https://minestom.net)                        | ❌          |         |
 
 <div id="installation"></div>
 
