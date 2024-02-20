@@ -8,7 +8,7 @@ import me.u8092.mirlo.api.event.impl.MirloMessageSentEvent;
 @RequiredArgsConstructor
 @Getter
 @Accessors(fluent = true)
-public class MirloMessage {
+public final class MirloMessage {
     private final String channel;
     private final String target;
     private final String message;
