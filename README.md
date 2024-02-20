@@ -53,6 +53,8 @@
 | [Folia](https://papermc.io/software/folia)              | ❌          |         |
 | [Minestom](https://minestom.net)                        | ❌          |         |
 
+Versions prior to 1.13 _might_ work but you won't receive any support.
+
 <div id="installation"></div>
 
 ## 📥 Installation
