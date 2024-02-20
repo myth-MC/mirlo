@@ -6,7 +6,7 @@
 
     <groupId>me.u8092</groupId>
     <artifactId>mirlo</artifactId>
-    <version>0.3.0c</version>
+    <version>0.3.0d</version>
     <packaging>pom</packaging>
     <modules>
         <module>bukkit</module>

@@ -5,6 +5,7 @@ import me.u8092.mirlo.api.channel.MirloChannelManager;
 import me.u8092.mirlo.api.config.MirloConfiguration;
 import me.u8092.mirlo.api.event.MirloEventManager;
 import me.u8092.mirlo.api.logger.LoggerWrapper;
+import me.u8092.mirlo.api.message.MirloMessage;
 import me.u8092.mirlo.api.variable.MirloVariableManager;
 import org.jetbrains.annotations.NotNull;
 

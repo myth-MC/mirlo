@@ -9,9 +9,14 @@ import java.util.List;
 @Getter
 @Accessors(fluent = true)
 public final class BasicMirloChannel extends MirloChannel {
+    private final List<String> send;
+    private final List<String> receive;
+
     public BasicMirloChannel(String id,
                              List<String> send,
                              List<String> receive) {
-        super(id, send, receive);
+        super(id);
+        this.send = send;
+        this.receive = receive;
     }
 }

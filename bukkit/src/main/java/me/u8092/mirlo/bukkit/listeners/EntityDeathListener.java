@@ -1,6 +1,6 @@
 package me.u8092.mirlo.bukkit.listeners;
 
-import me.u8092.mirlo.api.MirloMessage;
+import me.u8092.mirlo.api.message.MirloMessage;
 import me.u8092.mirlo.common.util.MirloMessageHandler;
 import me.u8092.mirlo.common.util.MirloVariableHandler;
 import org.bukkit.entity.Creature;

@@ -3,7 +3,7 @@ package me.u8092.mirlo.common.boot;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import me.u8092.mirlo.api.Mirlo;
-import me.u8092.mirlo.api.MirloMessage;
+import me.u8092.mirlo.api.message.MirloMessage;
 import me.u8092.mirlo.api.MirloSupplier;
 import me.u8092.mirlo.api.channel.MirloChannel;
 import me.u8092.mirlo.api.config.MirloConfiguration;
@@ -59,7 +59,7 @@ public abstract class MirloBootstrap<T> implements Mirlo {
 
         // ...
 
-        getLogger().info("Successfully shut doiwn.");
+        getLogger().info("Successfully shut down.");
     }
 
     public final void reload() {

@@ -38,7 +38,7 @@ public final class MirloChannelManager {
 
     @ApiStatus.Internal
     public void initialize() {
-        ConfigurationSection section = Mirlo.get().getConfig().getVariables().getSection();
+        ConfigurationSection section = Mirlo.get().getConfig().getChannels().getSection();
         for (String id : section.getKeys(false)) {
             List<String> send = section.getStringList(id + ".send");
             List<String> receive = section.getStringList(id + ".receive");
