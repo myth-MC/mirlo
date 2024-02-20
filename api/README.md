@@ -49,6 +49,7 @@ We can then check for the event we want to listen for:
 ```java
 import me.u8092.mirlo.api.event.MirloEvent;
 import me.u8092.mirlo.api.event.MirloEventListener;
+import me.u8092.mirlo.api.event.impl.MirloMessageSentEvent;
 
 public final class DemoListener implements MirloEventListener {
 
@@ -65,8 +66,31 @@ public final class DemoListener implements MirloEventListener {
 }
 ```
 
-Last but not least, we'll register our event listener using the mirlo API:
+Last but not least, we will register our event listener using the mirlo API:
 ```java
 Mirlo.get().getEventManager().registerListener(new DemoListener());
 ```
 
+## Sending a message
+
+You can send a message by calling `MirloMessage.send()`:
+
+```java
+import me.u8092.mirlo.api.MirloMessage;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+
+public class PlayerJoinListener implements Listener {
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        MirloMessage message = new MirloMessage(
+                "test", // Channel
+                "test", // Target
+                event.getPlayer().getName() + " has joined"); // Message
+        
+        message.send();
+    }
+}
+
+```
