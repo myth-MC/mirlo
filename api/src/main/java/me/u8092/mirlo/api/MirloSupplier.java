@@ -10,7 +10,7 @@ public class MirloSupplier {
     private Mirlo mirlo;
 
     public void set(final @NotNull Mirlo m) {
-        if(mirlo != null) {
+        if (mirlo != null) {
             throw new AlreadyInitializedException();
         }
         mirlo = Objects.requireNonNull(m);

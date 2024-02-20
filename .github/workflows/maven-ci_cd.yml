@@ -10,45 +10,45 @@ jobs:
   build_and_test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: 17
-    - name: Cache the Maven packages to speed up build
-      uses: actions/cache@v4
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2      
-    - name: Build project with Maven
-      run: mvn -B package --file pom.xml
-      
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+      - name: Cache the Maven packages to speed up build
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build project with Maven
+        run: mvn -B package --file pom.xml
+
   publish-job:
-      runs-on: ubuntu-latest
-      permissions:
-        contents: write
-        pull-requests: write
-        repository-projects: write
-        packages: write
-      needs: [build_and_test]
-      steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-java@v4
-          with:
-            distribution: 'temurin'
-            java-version: 17
-        - run: mvn -B package --file pom.xml -DskipTests 
-        - name: get-pom-version
-          id: pom-version
-          uses: CptMokoena/maven-get-version-action@master
-        - run: mkdir staging && cp api/target/*.jar staging && cp bukkit/target/*.jar staging
-        - uses: "marvinpinto/action-automatic-releases@latest"
-          with:
-            repo_token: "${{ secrets.GITHUB_TOKEN }}"
-            automatic_release_tag: "${{ steps.pom-version.outputs.version }}"
-            prerelease: true
-            title: "mirlo v${{ steps.pom-version.outputs.version }}"
-            files: |
-              staging/*.jar
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+      packages: write
+    needs: [ build_and_test ]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+      - run: mvn -B package --file pom.xml -DskipTests
+      - name: get-pom-version
+        id: pom-version
+        uses: CptMokoena/maven-get-version-action@master
+      - run: mkdir staging && cp api/target/*.jar staging && cp bukkit/target/*.jar staging
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "${{ steps.pom-version.outputs.version }}"
+          prerelease: true
+          title: "mirlo v${{ steps.pom-version.outputs.version }}"
+          files: |
+            staging/*.jar

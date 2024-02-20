@@ -20,13 +20,13 @@ public final class MirloEventManager {
 
     @ApiStatus.Internal
     public void publish(final @NotNull MirloEvent event) {
-        if(EVENT_LISTENERS.isEmpty()) return;
+        if (EVENT_LISTENERS.isEmpty()) return;
 
         EVENT_SERVICE.execute(() -> {
-            for(final MirloEventListener eventListener : EVENT_LISTENERS) {
+            for (final MirloEventListener eventListener : EVENT_LISTENERS) {
                 try {
                     eventListener.handle(event);
-                } catch(Throwable throwable) {
+                } catch (Throwable throwable) {
                     Mirlo.get().getLogger().error("Could not pass {} to listener: {}",
                             event.getClass().getSimpleName(), throwable);
                 }

@@ -18,6 +18,7 @@ import java.util.Map;
 import static me.u8092.mirlo.api.config.MirloConfiguration.LOGGER;
 
 @Getter
+@SuppressWarnings("unused")
 public final class SimpleYamlConfig {
     private final File file;
     private final YamlFile yaml;
@@ -161,7 +162,7 @@ public final class SimpleYamlConfig {
     }
 
     public ConfigurationSection getConfigurationSection(final String path) {
-        if(!yaml.contains(path)) {
+        if (!yaml.contains(path)) {
             LOGGER.warn("Could not find {} in {}.", path, file.getName());
             return yaml.createSection(path);
         }

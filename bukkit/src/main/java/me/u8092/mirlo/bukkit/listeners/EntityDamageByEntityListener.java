@@ -8,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class EntityDamageByEntityListener implements Listener {
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if(event.getEntity() instanceof Player victim && event.getDamager() instanceof Player attacker) {
+        if (event.getEntity() instanceof Player victim && event.getDamager() instanceof Player attacker) {
 
         }
     }

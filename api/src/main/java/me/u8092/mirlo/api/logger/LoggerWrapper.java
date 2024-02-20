@@ -5,17 +5,17 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.Array;
 
 public interface LoggerWrapper {
-    void info(final String message, final Object... args);
-
-    void warn(final String message, final Object... args);
-
-    void error(final String message, final Object... args);
-
     // Taken from
     // https://github.com/j256/ormlite-core/blob/master/src/main/java/com/j256/ormlite/logger/Logger.java
     String ARG_STRING = "{}";
     int ARG_STRING_LENGTH = ARG_STRING.length();
     Object UNKNOWN_ARG = new Object();
+
+    void info(final String message, final Object... args);
+
+    void warn(final String message, final Object... args);
+
+    void error(final String message, final Object... args);
 
     default String buildFullMessage(final @NotNull String msg, final Object... args) {
         StringBuilder sb = null;

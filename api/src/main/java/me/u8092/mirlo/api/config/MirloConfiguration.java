@@ -11,10 +11,8 @@ import org.simpleyaml.configuration.ConfigurationSection;
 import java.io.File;
 import java.util.Objects;
 
+@Getter
 public final class MirloConfiguration {
-    @Getter
-    private final SimpleYamlConfig settingsConfig, channelsConfig, variablesConfig;
-
     static final LoggerWrapper LOGGER = new LoggerWrapper() {
         @Override
         public void info(String message, Object... args) {
@@ -31,6 +29,10 @@ public final class MirloConfiguration {
             Mirlo.get().getLogger().error("[config] " + message, args);
         }
     };
+    private final SimpleYamlConfig settingsConfig, channelsConfig, variablesConfig;
+    private final Settings settings = new Settings();
+    private final Channels channels = new Channels();
+    private final Variables variables = new Variables();
 
     public MirloConfiguration(final @NotNull File pluginFolder) {
         this.settingsConfig = new SimpleYamlConfig(new File(pluginFolder, "settings.yml"));
@@ -54,16 +56,14 @@ public final class MirloConfiguration {
         settings.debug = settingsConfig.getBoolean("debug");
         channels.section = channelsConfig.getConfigurationSection("channels");
         variables.section = variablesConfig.getConfigurationSection("variables");
+
+        // Initialize global variables
+        Mirlo.get().getVariableManager().clear(); // This makes reloads VERY unstable
+        Mirlo.get().getVariableManager().initialize("global", "global");
+
+        // Initialize channels
+        Mirlo.get().getChannelManager().initialize(); // Will cause exceptions when reloading
     }
-
-    @Getter
-    private final Settings settings = new Settings();
-
-    @Getter
-    private final Channels channels = new Channels();
-
-    @Getter
-    private final Variables variables = new Variables();
 
     @Getter
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
