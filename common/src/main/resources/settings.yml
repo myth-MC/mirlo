@@ -4,4 +4,4 @@
 #
 
 # Enable this to track any possible issues
-debug: false
+debug: true

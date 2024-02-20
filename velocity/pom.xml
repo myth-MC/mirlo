@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -9,8 +9,9 @@
         <version>0.3.0e</version>
     </parent>
 
-    <artifactId>mirlo-bukkit</artifactId>
+    <artifactId>mirlo-velocity</artifactId>
     <version>1.0.0</version>
+
 
     <build>
         <defaultGoal>clean package</defaultGoal>
@@ -58,7 +59,7 @@
 
     <repositories>
         <repository>
-            <id>paper-repo</id>
+            <id>papermc</id>
             <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
     </repositories>
@@ -71,9 +72,9 @@
         </dependency>
 
         <dependency>
-            <groupId>io.papermc.paper</groupId>
-            <artifactId>paper-api</artifactId>
-            <version>1.20.4-R0.1-SNAPSHOT</version>
+            <groupId>com.velocitypowered</groupId>
+            <artifactId>velocity-api</artifactId>
+            <version>3.3.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

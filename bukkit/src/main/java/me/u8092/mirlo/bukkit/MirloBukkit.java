@@ -76,7 +76,7 @@ public final class MirloBukkit extends MirloBootstrap<MirloBukkitPlugin> {
         getPlugin().getServer().getPluginManager().registerEvents(new EntityDeathListener(), getPlugin());
         getPlugin().getServer().getPluginManager().registerEvents(new PlayerJoinListener(), getPlugin());
 
-        // Mirlo listeners
+        // mirlo listeners
         Mirlo.get().getEventManager().registerListener(new MirloMessageListener());
     }
 }

@@ -6,12 +6,13 @@
 
     <groupId>me.u8092</groupId>
     <artifactId>mirlo</artifactId>
-    <version>0.3.0d</version>
+    <version>0.3.0e</version>
     <packaging>pom</packaging>
     <modules>
         <module>bukkit</module>
         <module>common</module>
         <module>api</module>
+        <module>velocity</module>
     </modules>
 
     <properties>

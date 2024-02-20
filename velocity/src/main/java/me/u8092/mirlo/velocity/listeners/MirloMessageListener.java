@@ -1,4 +1,4 @@
-package me.u8092.mirlo.bukkit.listeners;
+package me.u8092.mirlo.velocity.listeners;
 
 import me.u8092.mirlo.api.Mirlo;
 import me.u8092.mirlo.api.event.MirloEvent;

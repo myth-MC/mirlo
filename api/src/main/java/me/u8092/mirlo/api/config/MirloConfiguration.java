@@ -9,6 +9,8 @@ import org.jetbrains.annotations.NotNull;
 import org.simpleyaml.configuration.ConfigurationSection;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Objects;
 
 @Getter
@@ -35,6 +37,11 @@ public final class MirloConfiguration {
     private final Variables variables = new Variables();
 
     public MirloConfiguration(final @NotNull File pluginFolder) {
+        try {
+            Files.createDirectories(pluginFolder.toPath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         this.settingsConfig = new SimpleYamlConfig(new File(pluginFolder, "settings.yml"));
         this.channelsConfig = new SimpleYamlConfig(new File(pluginFolder, "channels.yml"));
         this.variablesConfig = new SimpleYamlConfig(new File(pluginFolder, "variables.yml"));
