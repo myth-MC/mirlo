@@ -28,6 +28,5 @@ commons/target/
 *.jpg
 *.jpeg
 *.log
-*.yml
 *.svg
 *.txt
