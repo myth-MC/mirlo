@@ -34,16 +34,16 @@ jobs:
       packages: write
     needs: [ build_and_test ]
     steps:
-      - name: Get version
-        run: |
-          VERSION=$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout )
-          echo "::set-output name=version::$VERSION"
-        id: get_version
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: 17
+      - name: Get version
+        run: |
+          VERSION=$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout )
+          echo "version=$VERSION" >> $VERSION
+        id: get_version
       - run: mvn -B package --file pom.xml -DskipTests
       - run: mkdir staging && cp api/target/*.jar staging && cp bukkit/target/*.jar staging && cp velocity/target/*.jar staging
       - uses: "marvinpinto/action-automatic-releases@latest"
