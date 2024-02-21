@@ -1,0 +1,11 @@
+{
+  "id": "mirlo",
+  "name": "mirlo",
+  "version": "0.3.0",
+  "url": "https://mythmc.ovh/",
+  "description": "A simple approach to plugin messaging",
+  "authors": [
+    "U8092"
+  ],
+  "main": "me.u8092.mirlo.velocity.MirloVelocityPlugin"
+}

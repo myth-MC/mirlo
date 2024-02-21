@@ -1,0 +1,42 @@
+#
+# Variables settings for mirlo
+# https://github.com/myth-MC/mirlo
+#
+#
+# NOTE: Every value is EPHEMERAL and variables should NOT
+#       be used as a permanent storage solution.
+#
+
+variables:
+  # Variable will be named 'example_streak'
+  # You can use these variables in channels.yml
+  example_streak:
+    # Type of this variable
+    # Can be: count, boolean
+    # - count: a numeral variable that can increase, decrease or be resetted to its default value
+    # - boolean: a true/false variable
+    type: count
+    # Subject of this variable
+    # Can be: player, global
+    # - player: will be unique for each player
+    # - global: will be the same value for every player
+    scope: player
+    # Default value of this variable
+    default: 0
+    # When should this count variable increase
+    increase:
+      - PLAYER_KILLS_PLAYER_EVENT
+    # When should this count variable decrease
+    decrease: [ ]
+    # When should this count variable return to its default value
+    reset:
+      - PLAYER_DEATH_EVENT
+  has_died_this_session:
+    type: boolean
+    scope: player
+    default: false
+    true:
+      - PLAYER_DEATH_EVENT
+    false: [ ]
+    switch: [ ]
+    reset: [ ]

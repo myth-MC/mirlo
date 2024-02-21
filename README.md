@@ -1,9 +1,17 @@
-# mirlo 🐦‍⬛
-
-### A simple approach to [plugin messaging](https://web.archive.org/web/20220711204310/https://dinnerbone.com/blog/2012/01/13/minecraft-plugin-channels-messaging/)
+<div align="center">
+  <p>
+    <h1>mirlo 🐦‍⬛</h1>
+    <a href="https://github.com/myth-MC/mirlo/releases/latest"><img src="https://img.shields.io/github/v/release/myth-MC/mirlo?include_prereleases" alt="Latest release" /></a>
+    <a href="https://github.com/myth-MC/mirlo/pulls"><img src="https://img.shields.io/github/issues-pr/myth-MC/mirlo" alt="Pull requests" /></a>
+    <a href="https://github.com/myth-MC/mirlo/issues"><img src="https://img.shields.io/github/issues/myth-MC/mirlo" alt="Issues" /></a>
+    <a href="https://github.com/myth-MC/mirlo/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-blue.svg" alt="License" /></a>
+    <br>
+    A simple approach to <a href="https://web.archive.org/web/20220711204310/https://dinnerbone.com/blog/2012/01/13/minecraft-plugin-channels-messaging/">plugin messaging</a>
+  </p>
+</div>
 
 <details open="open">
-  <summary>Table of contents</summary>
+  <summary>Quick navigation</summary>
   <ol>
     <li>
       <a href="#information">Information</a>
@@ -14,12 +22,18 @@
     <li>
       <a href="#usage">Usage</a>
     </li>
+    <li>
+      <a href="#api">API</a>
+    </li>
+    <li>
+      <a href="#credits">Credits</a>
+    </li>
   </ol>
 </details>
 
 <div id="information"></div>
 
-## Information
+## 📚 Information
 
 **mirlo 🐦‍⬛** provides server owners with a simple way of implementing and handling plugin messaging between a proxy and its backends (check [Usage](#usage)).
 
@@ -30,17 +44,20 @@
 
 |                                                         | Compatible? | Version |
 |---------------------------------------------------------|-------------|---------|
-| [Velocity](https://papermc.io/software/velocity)        | ❌          |         |
+| [Velocity](https://papermc.io/software/velocity)        | ✅          | 3.3.0   |
 | [BungeeCord](https://www.spigotmc.org/wiki/bungeecord/) | ❌          |         |
-| [Paper](https://papermc.io/)                            | ✅          | 1.20+   |
-| [PurpurMC](https://purpurmc.org/)                       | ✅          | 1.20+   |
-| [Spigot](https://www.spigotmc.org)                      | ✅          | 1.20+   |
-| [Bukkit](https://bukkit.org)                            | ✅          | 1.20+   |
+| [Paper](https://papermc.io/)                            | ✅          | 1.13+   |
+| [PurpurMC](https://purpurmc.org/)                       | ✅          | 1.13+   |
+| [Spigot](https://www.spigotmc.org)                      | ✅          | 1.13+   |
+| [Bukkit](https://bukkit.org)                            | ✅          | 1.13+   |
 | [Folia](https://papermc.io/software/folia)              | ❌          |         |
+| [Minestom](https://minestom.net)                        | ❌          |         |
+
+Versions prior to 1.13 _might_ work but you won't receive any support.
 
 <div id="installation"></div>
 
-## Installation
+## 📥 Installation
 
 1. **Download the mirlo jar file for your platform**. You can find the latest version on [our releases page](https://github.com/myth-MC/mirlo/releases).
 2. **Add the mirlo jar file to your server's plugin folder**. Make sure to delete any older versions of mirlo.
@@ -50,9 +67,14 @@ Repeat the steps for every backend of your network.
 
 <div id="usage"></div>
 
-## Usage
+## 🖊️ Usage
 
-When you run mirlo for the first time it will generate a `config.yml` file under `/plugins/mirlo`. This file contains everything you might want to modify depending on your server's needs.
+When you run mirlo for the very first time it will automatically generate three different configurable files that can be adjusted depending on your server's needs:
+* `settings.yml` contains general settings
+* `channels.yml` contains every channel to listen for
+* `variables.yml` contains every variable
+
+Every file has one or more examples with hints.
 
 ### Events
 
@@ -76,29 +98,18 @@ Channels are the mean of communication where information will be exchanged with 
 #### Placeholders
 
 You can use placeholders when sending or receiving a plugin message from a specific channel. Valid placeholders are:
-* Pre-defined variables (config.yml)
+* Pre-defined variables (variables.yml)
 * `player`
 * `targetPlayer`
 
-### Example _config.yml_ with hints
+<div id="api"></div>
 
-```yaml
-variables:
-  streak: # Variable "streak"
-    type: count # Can be count or boolean
-    scope: player # This variable will be unique for every player. Change to "global" if you want it to be the same for every player
-    default: 0 # The default value whenever "streak" is resetted
-    increase: # When should "streak" increase
-      - PLAYER_KILLS_PLAYER_EVENT # A player kills another player
-    decrease: [] # When should "streak" decrease. (never in this case)
-    reset: # When should "streak" return to its default value
-      - PLAYER_DEATH_EVENT # A player dies
+## ⚙️ API
+**mirlo** exposes a simple API via the `Mirlo.get()` method.
 
-channels:
-  players: # Channel "mirlo:players"
-    target: proxy # Where should messages from this channels be sent (survival, skywars, etc) (set to all if message should be sent to every backend)
-    send: # What events should be sent
-      - PLAYER_KILLS_PLAYER_EVENT,streak
-      - PLAYER_DEATH_EVENT
-    receive: [] # Won't do anything for now
-```
+You can check [our guide on using mirlo-api](https://github.com/myth-MC/mirlo/blob/0.3.0-dev/api/README.md/).
+
+<div id="credits"></div>
+
+## 📜 Credits
+* Events API and config is taken from [Sonar](https://github.com/jonesdevelopment/sonar/tree/main).

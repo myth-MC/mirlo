@@ -1,0 +1,7 @@
+#
+# General settings for mirlo
+# https://github.com/myth-MC/mirlo
+#
+
+# Enable this to track any possible issues
+debug: true
