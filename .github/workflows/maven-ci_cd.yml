@@ -47,7 +47,7 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "${{ steps.pom-version.outputs.version }}"
+          automatic_release_tag: "latest"
           prerelease: true
           title: "mirlo v${{ steps.pom-version.outputs.version }}"
           files: |
