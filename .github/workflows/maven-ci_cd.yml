@@ -45,12 +45,12 @@ jobs:
           distribution: 'temurin'
           java-version: 17
       - run: mvn -B package --file pom.xml -DskipTests
-      - run: mkdir staging && cp api/target/*.jar staging && cp bukkit/target/*.jar staging
+      - run: mkdir staging && cp api/target/*.jar staging && cp bukkit/target/*.jar staging && cp velocity/target/*.jar staging
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
+          automatic_release_tag: "${{ steps.get_version.outputs.version }}"
           prerelease: true
-          title: "mirlo v${{ steps.get-version.outputs.version }}"
+          title: "mirlo v${{ steps.get_version.outputs.version }}"
           files: |
             staging/*.jar
