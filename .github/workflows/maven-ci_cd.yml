@@ -39,18 +39,16 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 17
-      - name: Get version
+      - name: Set Release version env variable
         run: |
-          VERSION=$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout )
-          echo "version=$VERSION" >> $VERSION
-        id: get_version
+          echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
       - run: mvn -B package --file pom.xml -DskipTests
       - run: mkdir staging && cp api/target/*.jar staging && cp bukkit/target/*.jar staging && cp velocity/target/*.jar staging
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "${{ steps.get_version.outputs.version }}"
+          automatic_release_tag: "${{ env.RELEASE_VERSION }}"
           prerelease: true
-          title: "mirlo v${{ steps.get_version.outputs.version }}"
+          title: "mirlo v${{ env.RELEASE_VERSION }}"
           files: |
             staging/*.jar
