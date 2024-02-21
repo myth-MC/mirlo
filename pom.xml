@@ -10,9 +10,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>bukkit</module>
+        <module>velocity</module>
         <module>common</module>
         <module>api</module>
-        <module>velocity</module>
     </modules>
 
     <properties>
