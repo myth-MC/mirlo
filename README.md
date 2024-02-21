@@ -1,7 +1,7 @@
 <div align="center">
   <p>
     <h1>mirlo 🐦‍⬛</h1>
-    <a href="https://github.com/myth-MC/mirlo/releases/latest"><img src="https://img.shields.io/github/v/release/myth-MC/mirlo?include_prereleases" alt="Latest release" /></a>
+    <a href="https://github.com/myth-MC/mirlo/releases/latest"><img src="https://img.shields.io/github/v/release/myth-MC/mirlo" alt="Latest release" /></a>
     <a href="https://github.com/myth-MC/mirlo/pulls"><img src="https://img.shields.io/github/issues-pr/myth-MC/mirlo" alt="Pull requests" /></a>
     <a href="https://github.com/myth-MC/mirlo/issues"><img src="https://img.shields.io/github/issues/myth-MC/mirlo" alt="Issues" /></a>
     <a href="https://github.com/myth-MC/mirlo/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-blue.svg" alt="License" /></a>
