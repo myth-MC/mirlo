@@ -23,9 +23,9 @@ public class EntityDeathListener implements Listener {
 
         if (victim instanceof Player) {
             lookFor.put("targetPlayer", victim.getName());
-            MirloVariableHandler.update("PLAYER_DEATH_EVENT", victim.getName(), true);
+            MirloVariableHandler.update("DEATH", victim.getName(), true);
 
-            for (MirloMessage message : MirloMessageHandler.formatEvent(victim.getName(), "PLAYER_DEATH_EVENT", lookFor)) {
+            for (MirloMessage message : MirloMessageHandler.formatEvent(victim.getName(), "DEATH", lookFor)) {
                 message.send();
             }
         }
@@ -35,9 +35,9 @@ public class EntityDeathListener implements Listener {
                 lookFor.put("player", killer.getName());
 
                 if (victim instanceof Creature) {
-                    MirloVariableHandler.update("PLAYER_KILLS_CREATURE_EVENT", victim.getName(), true);
+                    MirloVariableHandler.update("PLAYER_KILLS_CREATURE", victim.getName(), true);
 
-                    for (MirloMessage message : MirloMessageHandler.formatEvent(victim.getName(), "PLAYER_KILLS_CREATURE_EVENT", lookFor)) {
+                    for (MirloMessage message : MirloMessageHandler.formatEvent(victim.getName(), "PLAYER_KILLS_CREATURE", lookFor)) {
                         message.send();
                     }
                 }
@@ -45,9 +45,9 @@ public class EntityDeathListener implements Listener {
                 if (victim instanceof Player) {
                     lookFor.put("targetPlayer", victim.getName());
 
-                    MirloVariableHandler.update("PLAYER_KILLS_PLAYER_EVENT", killer.getName(), true);
+                    MirloVariableHandler.update("PLAYER_KILLS_PLAYER", killer.getName(), true);
 
-                    for (MirloMessage message : MirloMessageHandler.formatEvent(killer.getName(), "PLAYER_KILLS_PLAYER_EVENT", lookFor)) {
+                    for (MirloMessage message : MirloMessageHandler.formatEvent(killer.getName(), "PLAYER_KILLS_PLAYER", lookFor)) {
                         message.send();
                     }
                 }

@@ -8,10 +8,7 @@ import me.u8092.mirlo.api.Mirlo;
 import me.u8092.mirlo.api.message.MirloMessage;
 import me.u8092.mirlo.api.channel.MirloChannel;
 import me.u8092.mirlo.api.logger.LoggerWrapper;
-import me.u8092.mirlo.bukkit.listeners.EntityDamageByEntityListener;
-import me.u8092.mirlo.bukkit.listeners.EntityDeathListener;
-import me.u8092.mirlo.bukkit.listeners.MirloMessageListener;
-import me.u8092.mirlo.bukkit.listeners.PlayerJoinListener;
+import me.u8092.mirlo.bukkit.listeners.*;
 import me.u8092.mirlo.common.boot.MirloBootstrap;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -72,9 +69,12 @@ public final class MirloBukkit extends MirloBootstrap<MirloBukkitPlugin> {
 
     private void registerListeners() {
         // Bukkit listeners
-        getPlugin().getServer().getPluginManager().registerEvents(new EntityDamageByEntityListener(), getPlugin());
         getPlugin().getServer().getPluginManager().registerEvents(new EntityDeathListener(), getPlugin());
         getPlugin().getServer().getPluginManager().registerEvents(new PlayerJoinListener(), getPlugin());
+        getPlugin().getServer().getPluginManager().registerEvents(new PlayerGameModeChangeListener(), getPlugin());
+        getPlugin().getServer().getPluginManager().registerEvents(new PlayerLocaleChangeListener(), getPlugin());
+        getPlugin().getServer().getPluginManager().registerEvents(new PlayerExpChangeListener(), getPlugin());
+        getPlugin().getServer().getPluginManager().registerEvents(new PlayerToggleFlightListener(), getPlugin());
 
         // mirlo listeners
         Mirlo.get().getEventManager().registerListener(new MirloMessageListener());

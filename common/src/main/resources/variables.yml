@@ -25,18 +25,18 @@ variables:
     default: 0
     # When should this count variable increase
     increase:
-      - PLAYER_KILLS_PLAYER_EVENT
+      - PLAYER_KILLS_PLAYER
     # When should this count variable decrease
     decrease: [ ]
     # When should this count variable return to its default value
     reset:
-      - PLAYER_DEATH_EVENT
+      - DEATH
   has_died_this_session:
     type: boolean
     scope: player
     default: false
     true:
-      - PLAYER_DEATH_EVENT
+      - DEATH
     false: [ ]
     switch: [ ]
     reset: [ ]

@@ -12,5 +12,5 @@ channels:
       # targetPlayer = player who is affected by this event
       #
       # example_streak is defined in variables.yml
-      - PLAYER_KILLS_PLAYER_EVENT,player,targetPlayer,example_streak
-      - PLAYER_DEATH_EVENT,targetPlayer
+      - PLAYER_KILLS_PLAYER,player,targetPlayer,example_streak
+      - DEATH,targetPlayer

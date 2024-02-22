@@ -79,9 +79,13 @@ Every file has one or more examples with hints.
 ### Events
 
 Events listen for specific actions that happen in the game. Right now you can use:
-* **PLAYER_KILLS_PLAYER_EVENT** (player, targetPlayer): triggered whenever a player kills another player.
-* **PLAYER_KILLS_CREATURE_EVENT** (player): triggered whenever a player kills a mob.
-* **PLAYER_DEATH_EVENT** (targetPlayer): triggered whenever a player dies.
+* **PLAYER_KILLS_PLAYER** (player, targetPlayer): triggered whenever a player kills another player.
+* **PLAYER_KILLS_CREATURE** (player): triggered whenever a player kills a mob.
+* **DEATH** (targetPlayer): triggered whenever a player dies.
+* **GAMEMODE** (targetPlayer, gamemode): triggered whenever a player's game mode is changed.
+* **LOCALE** (targetPlayer, locale): triggered whenever a player's language settings are changed.
+* **XP_CHANGE** (targetPlayer, xp, totalXp): triggered whenever a player's experience changes naturally.
+* **FLIGHT** (targetPlayer, status): triggered whenever a player toggles their flying state.
 
 _Values in parentheses are placeholders._
 
