@@ -50,8 +50,8 @@
 | [PurpurMC](https://purpurmc.org/)                       | ✅          | 1.13+   |
 | [Spigot](https://www.spigotmc.org)                      | ✅          | 1.13+   |
 | [Bukkit](https://bukkit.org)                            | ✅          | 1.13+   |
+| [Minestom](https://minestom.net)                        | ✅          | Latest  |
 | [Folia](https://papermc.io/software/folia)              | ❌          |         |
-| [Minestom](https://minestom.net)                        | ❌          |         |
 
 Versions prior to 1.13 _might_ work but you won't receive any support.
 
