@@ -5,16 +5,14 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import lombok.Getter;
 import me.u8092.mirlo.api.Mirlo;
-import me.u8092.mirlo.api.message.MirloMessage;
 import me.u8092.mirlo.api.channel.MirloChannel;
 import me.u8092.mirlo.api.logger.LoggerWrapper;
+import me.u8092.mirlo.api.message.MirloMessage;
 import me.u8092.mirlo.bukkit.listeners.*;
 import me.u8092.mirlo.common.boot.MirloBootstrap;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 @Getter
 public final class MirloBukkit extends MirloBootstrap<MirloBukkitPlugin> {
@@ -54,16 +52,21 @@ public final class MirloBukkit extends MirloBootstrap<MirloBukkitPlugin> {
     }
 
     @Override
-    public void registerChannels(List<MirloChannel> channels) {
-        for (MirloChannel channel : channels) {
-            getPlugin().getServer().getMessenger().registerOutgoingPluginChannel(getPlugin(), "mirlo:" + channel.id());
-            getPlugin().getServer().getMessenger().registerIncomingPluginChannel(getPlugin(), "mirlo:" + channel.id(), new PluginMessageReceiver());
-        }
+    public void registerMirloChannel(MirloChannel channel) {
+        getPlugin().getServer().getMessenger().registerOutgoingPluginChannel(getPlugin(), "mirlo:" + channel.id());
+        getPlugin().getServer().getMessenger().registerIncomingPluginChannel(getPlugin(), "mirlo:" + channel.id(), new PluginMessageReceiver());
+    }
+
+    @Override
+    public void unregisterMirloChannel(MirloChannel channel) {
+        getPlugin().getServer().getMessenger().unregisterOutgoingPluginChannel(getPlugin(), "mirlo:" + channel.id());
+        getPlugin().getServer().getMessenger().unregisterIncomingPluginChannel(getPlugin(), "mirlo:" + channel.id());
     }
 
     @Override
     public void sendMirloMessage(MirloMessage message) {
         Player player = Iterables.getFirst(Bukkit.getOnlinePlayers(), null);
+
         player.sendPluginMessage(getPlugin(), "mirlo:" + message.channel(), byteArray(message.message()));
     }
 

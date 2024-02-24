@@ -1,9 +1,9 @@
 package me.u8092.mirlo.common.util;
 
 import me.u8092.mirlo.api.Mirlo;
-import me.u8092.mirlo.api.message.MirloMessage;
+import me.u8092.mirlo.api.channel.BasicMirloChannel;
 import me.u8092.mirlo.api.channel.MirloChannel;
-import me.u8092.mirlo.api.channel.impl.BasicMirloChannel;
+import me.u8092.mirlo.api.message.MirloMessage;
 import me.u8092.mirlo.api.variable.MirloVariable;
 
 import java.util.ArrayList;
@@ -30,22 +30,23 @@ public class MirloMessageHandler {
                                         .replace(variable.name(), String.valueOf(variable.value()));
                             }
                         }
+
+                        // Replace lookFor
+                        for (Map.Entry<String, String> lookFor : replace.entrySet()) {
+                            joinedArgs = joinedArgs
+                                    .replace(lookFor.getKey(), lookFor.getValue());
+                        }
+
+                        // Put , at the start
+                        if (!joinedArgs.isEmpty() && !joinedArgs.startsWith(",")) {
+                            joinedArgs = "," + joinedArgs;
+                        }
+
+                        toSend.add(new MirloMessage(channel.id(), event + joinedArgs));
+                        joinedArgs = ""; // This will clear 'joinedArgs' to ensure that we don't run into any issues
                     }
                 }
             }
-
-            // Replace lookFor
-            for (Map.Entry<String, String> lookFor : replace.entrySet()) {
-                joinedArgs = joinedArgs
-                        .replace(lookFor.getKey(), lookFor.getValue());
-            }
-
-            // Put , at start
-            if (!joinedArgs.isEmpty() && !joinedArgs.startsWith(",")) {
-                joinedArgs = "," + joinedArgs;
-            }
-
-            toSend.add(new MirloMessage(channel.id(), event + joinedArgs));
         }
 
         return toSend;

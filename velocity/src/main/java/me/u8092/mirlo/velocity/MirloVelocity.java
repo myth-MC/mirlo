@@ -13,8 +13,6 @@ import me.u8092.mirlo.common.boot.MirloBootstrap;
 import me.u8092.mirlo.velocity.listeners.MirloMessageListener;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 @Getter
 public final class MirloVelocity extends MirloBootstrap<MirloVelocityPlugin> {
     public static MirloVelocity INSTANCE;
@@ -55,10 +53,13 @@ public final class MirloVelocity extends MirloBootstrap<MirloVelocityPlugin> {
     }
 
     @Override
-    public void registerChannels(List<MirloChannel> channels) {
-        for (MirloChannel channel : channels) {
-            getPlugin().getServer().getChannelRegistrar().register(MinecraftChannelIdentifier.from("mirlo:" + channel.id()));
-        }
+    public void registerMirloChannel(MirloChannel channel) {
+        getPlugin().getServer().getChannelRegistrar().register(MinecraftChannelIdentifier.from("mirlo:" + channel.id()));
+    }
+
+    @Override
+    public void unregisterMirloChannel(MirloChannel channel) {
+        getPlugin().getServer().getChannelRegistrar().unregister(MinecraftChannelIdentifier.from("mirlo:" + channel.id()));
     }
 
     public static byte[] byteArray(String message) {

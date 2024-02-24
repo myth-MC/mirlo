@@ -3,14 +3,13 @@ package me.u8092.mirlo.common.boot;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import me.u8092.mirlo.api.Mirlo;
-import me.u8092.mirlo.api.message.MirloMessage;
 import me.u8092.mirlo.api.MirloSupplier;
 import me.u8092.mirlo.api.channel.MirloChannel;
 import me.u8092.mirlo.api.config.MirloConfiguration;
+import me.u8092.mirlo.api.message.MirloMessage;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.util.List;
 
 @Getter
 @RequiredArgsConstructor
@@ -43,14 +42,16 @@ public abstract class MirloBootstrap<T> implements Mirlo {
         }
 
         // Register channels
-        registerChannels(Mirlo.get().getChannelManager().get());
+        //registerChannels(Mirlo.get().getChannelManager().get());
 
         // reserved for update checking
     }
 
     public abstract void enable();
 
-    public abstract void registerChannels(List<MirloChannel> channels);
+    public abstract void registerMirloChannel(MirloChannel channel);
+
+    public abstract void unregisterMirloChannel(MirloChannel channel);
 
     public abstract void sendMirloMessage(MirloMessage message);
 

@@ -9,8 +9,6 @@ import me.u8092.mirlo.api.message.MirloMessage;
 import me.u8092.mirlo.api.variable.MirloVariableManager;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 public interface Mirlo {
     @NotNull
     static Mirlo get() {
@@ -19,7 +17,9 @@ public interface Mirlo {
 
     void reload();
 
-    void registerChannels(List<MirloChannel> channels);
+    void registerMirloChannel(MirloChannel channel);
+
+    void unregisterMirloChannel(MirloChannel channel);
 
     void sendMirloMessage(MirloMessage message);
 

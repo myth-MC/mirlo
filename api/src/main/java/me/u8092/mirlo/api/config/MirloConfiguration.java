@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import me.u8092.mirlo.api.Mirlo;
+import me.u8092.mirlo.api.channel.BasicMirloChannel;
 import me.u8092.mirlo.api.logger.LoggerWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.simpleyaml.configuration.ConfigurationSection;
@@ -11,6 +12,7 @@ import org.simpleyaml.configuration.ConfigurationSection;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -42,6 +44,7 @@ public final class MirloConfiguration {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         this.settingsConfig = new SimpleYamlConfig(new File(pluginFolder, "settings.yml"));
         this.channelsConfig = new SimpleYamlConfig(new File(pluginFolder, "channels.yml"));
         this.variablesConfig = new SimpleYamlConfig(new File(pluginFolder, "variables.yml"));
@@ -69,7 +72,17 @@ public final class MirloConfiguration {
         Mirlo.get().getVariableManager().initialize("global", "global");
 
         // Initialize channels
-        Mirlo.get().getChannelManager().initialize(); // Will cause exceptions when reloading
+        initializeChannels(); // Will cause exceptions when reloading
+    }
+
+    private void initializeChannels() {
+        ConfigurationSection section = Mirlo.get().getConfig().getChannels().getSection();
+        for (String id : section.getKeys(false)) {
+            List<String> send = section.getStringList(id + ".send");
+            List<String> receive = section.getStringList(id + ".receive");
+
+            new BasicMirloChannel(id, send, receive).register();
+        }
     }
 
     @Getter
