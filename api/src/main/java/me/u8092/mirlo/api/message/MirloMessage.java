@@ -1,7 +1,6 @@
 package me.u8092.mirlo.api.message;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 import me.u8092.mirlo.api.Mirlo;
 import me.u8092.mirlo.api.event.impl.MirloMessageSendEvent;

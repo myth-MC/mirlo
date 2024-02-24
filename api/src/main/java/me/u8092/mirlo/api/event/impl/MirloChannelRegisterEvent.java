@@ -5,14 +5,14 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import me.u8092.mirlo.api.channel.MirloChannel;
 import me.u8092.mirlo.api.event.MirloEvent;
-import me.u8092.mirlo.api.message.Message;
 
 @Getter
 @Accessors(fluent = true)
 @ToString
 @EqualsAndHashCode
 @RequiredArgsConstructor
-public final class MirloMessageReceiveEvent implements MirloEvent {
-    private final Message message;
+public final class MirloChannelRegisterEvent implements MirloEvent {
+    private final MirloChannel channel;
 }

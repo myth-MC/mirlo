@@ -6,7 +6,6 @@ import me.u8092.mirlo.common.util.MirloVariableHandler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerExpChangeEvent;
-import org.bukkit.event.player.PlayerLocaleChangeEvent;
 
 import java.util.HashMap;
 import java.util.Map;

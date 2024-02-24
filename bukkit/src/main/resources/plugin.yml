@@ -1,5 +1,5 @@
 name: mirlo
-version: 0.3.1
+version: ${project.parent.version}
 main: me.u8092.mirlo.bukkit.MirloBukkitPlugin
 author: U8092
 website: https://mythmc.ovh/

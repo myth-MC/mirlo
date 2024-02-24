@@ -35,9 +35,9 @@ public class EntityDeathListener implements Listener {
                 lookFor.put("player", killer.getName());
 
                 if (victim instanceof Creature) {
-                    MirloVariableHandler.update("PLAYER_KILLS_CREATURE", victim.getName(), true);
+                    MirloVariableHandler.update("PLAYER_KILLS_CREATURE", killer.getName(), true);
 
-                    for (MirloMessage message : MirloMessageHandler.formatEvent(victim.getName(), "PLAYER_KILLS_CREATURE", lookFor)) {
+                    for (MirloMessage message : MirloMessageHandler.formatEvent(killer.getName(), "PLAYER_KILLS_CREATURE", lookFor)) {
                         message.send();
                     }
                 }

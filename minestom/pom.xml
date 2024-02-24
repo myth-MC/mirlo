@@ -9,9 +9,8 @@
         <version>0.4.0b</version>
     </parent>
 
-    <artifactId>mirlo-velocity</artifactId>
+    <artifactId>mirlo-minestom</artifactId>
     <version>1.0.0</version>
-
 
     <build>
         <defaultGoal>clean package</defaultGoal>
@@ -24,7 +23,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.6.0</version>
+                <version>2.5.5</version>
                 <configuration>
                     <finalName>${project.artifactId}_v${project.parent.version}_${maven.build.timestamp}</finalName>
                     <descriptorRefs>
@@ -63,13 +62,6 @@
         <maven.build.timestamp.format>MMddyy_HHmm</maven.build.timestamp.format>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>papermc</id>
-            <url>https://repo.papermc.io/repository/maven-public/</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>me.u8092</groupId>
@@ -78,9 +70,22 @@
         </dependency>
 
         <dependency>
-            <groupId>com.velocitypowered</groupId>
-            <artifactId>velocity-api</artifactId>
-            <version>3.3.0-SNAPSHOT</version>
+            <groupId>net.minestom</groupId>
+            <artifactId>minestom-snapshots</artifactId>
+            <version>7320437640</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                    <artifactId>shrinkwrap-resolver-depchain</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.hollowcube</groupId>
+            <artifactId>minestom-ce-extensions</artifactId>
+            <version>1.2.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
