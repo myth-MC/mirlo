@@ -1,0 +1,5 @@
+{
+  "entrypoint": "me.u8092.mirlo.minestom.MirloMinestomExtension",
+  "name": "mirlo",
+  "version": "${project.parent.version}"
+}
