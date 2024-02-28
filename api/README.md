@@ -21,7 +21,7 @@ Before starting to actually use the API, you will have to add the [JitPack](http
 		<dependency>
 			<groupId>com.github.myth-MC.mirlo</groupId>
 		    	<artifactId>mirlo-api</artifactId>
-		    	<version>0.3.0</version>
+		    	<version>0.4.0b</version>
 		</dependency>
 	</dependencies>
 ```
@@ -29,7 +29,7 @@ Before starting to actually use the API, you will have to add the [JitPack](http
 You can access all the main API functions by using `Mirlo.get()`.
 
 ## Listening to events
-**mirlo-api** provides an easy way to integrate events across different platforms by using its built-in event system. Let's start by creating a `MirloEventListener`:
+**mirlo-api** provides an easy way to integrate events across different platforms by using its built-in event system. Let's start by implementing `MirloEventListener` into our `DemoListener`:
 
 ```java
 import me.u8092.mirlo.api.event.MirloEvent;
@@ -55,18 +55,17 @@ public final class DemoListener implements MirloEventListener {
 
   @Override
   public void handle(final MirloEvent event) {
-    // We want to check for MirloMessageSentEvent
-    if(event instanceof MirloMessageSentEvent messageSentEvent) {
-      // This code will run every time a MirloMessageSentEvent is triggered
-      System.out.println("Sent a message through channel " + messageSentEvent.getChannel()
-          + " to " + messageSentEvent.getTarget()
-          + ": " + messageSentEvent.getMessage());
+    // We want to check for MirloMessageSendEvent
+    if(event instanceof MirloMessageSendEvent messageSendEvent) {
+      // This code will run every time a MirloMessageSendEvent is triggered
+      System.out.println("Sent a message through channel " + messageSendEvent.message().channel()
+          + ": " + messageSendEvent.message().message());
     }
   }
 }
 ```
 
-Last but not least, we will register our event listener using the mirlo API:
+Last but not least, we will register our `DemoListener` using the mirlo API:
 ```java
 Mirlo.get().getEventManager().registerListener(new DemoListener());
 ```
@@ -77,6 +76,7 @@ You can send a message by calling `MirloMessage.send()`:
 
 ```java
 import me.u8092.mirlo.api.MirloMessage;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -85,11 +85,54 @@ public class PlayerJoinListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         MirloMessage message = new MirloMessage(
-                "test", // Channel
-                "test", // Target
-                event.getPlayer().getName() + " has joined"); // Message
+                "test",                                 // Channel ID
+                "JOIN," + event.getPlayer().getName()); // Message
         
         message.send();
+    }
+}
+
+```
+
+## Registering a channel
+
+You can register a MirloChannel by calling `BasicMirloChannel.register()`:
+
+```java
+import java.util.List;
+
+import me.u8092.mirlo.api.channel.BasicMirloChannel;
+
+public final class ChannelsDemo {
+    BasicMirloChannel channel = new BasicMirloChannel(
+        "test",          // Channel ID
+        List.of("JOIN"), // Events that will be sent through this channel
+        List.of("JOIN")  // Events that will be received through this channel
+    );
+
+    private void registerChannels() {
+        channel.register();
+    }
+}
+
+```
+
+And unregister it by calling `BasicMirloChannel.unregister()`:
+
+```java
+import java.util.List;
+
+import me.u8092.mirlo.api.channel.BasicMirloChannel;
+
+public final class ChannelsDemo {
+    BasicMirloChannel channel = new BasicMirloChannel(
+        "test",          // Channel ID
+        List.of("JOIN"), // Events that will be sent through this channel
+        List.of("JOIN")  // Events that will be received through this channel
+    );
+
+    private void unregisterChannels() {
+        channel.unregister();
     }
 }
 
