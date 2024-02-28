@@ -111,7 +111,7 @@ You can use placeholders when sending or receiving a plugin message from a speci
 ## ⚙️ API
 **mirlo** exposes a simple API via the `Mirlo.get()` method.
 
-You can check [our guide on using mirlo-api](https://github.com/myth-MC/mirlo/blob/0.3.0-dev/api/README.md/).
+You can check [our guide on using mirlo-api](https://github.com/myth-MC/mirlo/blob/main/api/README.md/).
 
 <div id="credits"></div>
 
