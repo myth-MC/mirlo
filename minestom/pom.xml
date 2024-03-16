@@ -23,7 +23,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.5.5</version>
+                <version>3.7.0</version>
                 <configuration>
                     <finalName>${project.artifactId}_v${project.parent.version}_${maven.build.timestamp}</finalName>
                     <descriptorRefs>
